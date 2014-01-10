@@ -21,27 +21,25 @@ html lang="en"
 
 
   body
-    .navbar.navbar-fixed-top
-      .navbar-inner
+    .navbar.navbar-static-top
         .container
-          a.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse"
+          button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse"
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.brand href="#"Gitpeach
-          .container.nav-collapse
-            ul.nav
+          a.navbar-brand href="#"Gitpeach
+          .nav-collapse.collapse.navbar-responsive-collapse
+            ul.nav.navbar-nav
               li= link_to "Link 1", "/path1"
               li= link_to "Link 2", "/path2"
               li= link_to "Link 3", "/path3"
 
     .container
-
       .row
-        .span9
+        .col-lg-9
           = bootstrap_flash
           = yield
-        .span3
+        .col-lg-3
           .well.sidebar-nav
             h3 Sidebar
             ul.nav.nav-list
@@ -49,6 +47,6 @@ html lang="en"
               li= link_to "Link 1", "/path1"
               li= link_to "Link 2", "/path2"
               li= link_to "Link 3", "/path3"
-    
+
       footer
         p &copy; Company 2014
