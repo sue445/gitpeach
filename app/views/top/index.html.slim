@@ -1,2 +1,17 @@
-h1 Top#index
-p Find me in app/views/top/index.html.slim
+h1 Gitpeach
+
+= form_tag "/", class: "form-horizontal" do
+  .form-group
+    label for="login" class="col-sm-2 control-label"
+      | Login
+    .col-sm-8
+      = text_field_tag :login, nil, class: "form-control"
+  .form-group
+    label for="password" class="col-sm-2 control-label"
+      | Password
+    .col-sm-8
+      = password_field_tag :password, nil, class: "form-control"
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = button_tag type: "submit", class: "btn btn-default" do
+        | Login with Gitlab
