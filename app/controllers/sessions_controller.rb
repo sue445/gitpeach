@@ -7,8 +7,14 @@ class SessionsController < ApplicationController
     end
 
     session[:user_id] = user.id
+    redirect_to root_url, notice: "Signed in!"
+
+  rescue Gitlab::Error::Unauthorized => e
+    redirect_to root_url, alert: "Unauthorized"
   end
 
   def destroy
+    session[:user_id] = nil
+    redirect_to root_url, notice: "Signed Out!"
   end
 end
