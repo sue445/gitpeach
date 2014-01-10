@@ -13,8 +13,8 @@ development:
   encoding: utf8
   database: gitpeach_development
   pool: 5
-  username: momozono
-  password: love
+  username: root
+  password: root
   socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
@@ -25,8 +25,8 @@ test:
   encoding: utf8
   database: gitpeach_test
   pool: 5
-  username: momozono
-  password: love
+  username: root
+  password: root
   socket: /tmp/mysql.sock
 
 production:
