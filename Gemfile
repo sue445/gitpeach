@@ -75,5 +75,5 @@ end
 # twitter-bootstrap-rails
 gem "less-rails"
 gem "libv8", "~> 3.11.8"
-gem "twitter-bootstrap-rails", ">= 2.1.3"
+gem "twitter-bootstrap-rails", github: "seyhunak/twitter-bootstrap-rails", branch: "bootstrap3"
 gem "therubyracer", ">= 0.10.2", platform: :ruby
