@@ -27,8 +27,9 @@ html lang="en"
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand href="#"Gitpeach
-          .nav-collapse.collapse.navbar-responsive-collapse
+          a.navbar-brand href="/"
+            | Gitpeach
+          .nav-collapse.collapse.in.navbar-responsive-collapse
             ul.nav.navbar-nav
               li= link_to "Link 1", "/path1"
               li= link_to "Link 2", "/path2"
@@ -36,17 +37,9 @@ html lang="en"
 
     .container
       .row
-        .col-lg-9
+        .col-lg-12
           = bootstrap_flash
           = yield
-        .col-lg-3
-          .well.sidebar-nav
-            h3 Sidebar
-            ul.nav.nav-list
-              li.nav-header Sidebar
-              li= link_to "Link 1", "/path1"
-              li= link_to "Link 2", "/path2"
-              li= link_to "Link 3", "/path3"
 
       footer
-        p &copy; Company 2014
+        p &copy; sue445 2014-

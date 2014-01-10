@@ -5,6 +5,7 @@ gem 'rails', '4.0.2'
 
 # Use mysql as the database for Active Record
 gem 'mysql2'
+gem 'pg'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -47,7 +48,7 @@ end
 gem "slim-rails"
 # dev tool
 group :development do
-  gem "annotate", ">=2.5.0", require: false
+  gem "annotate", "2.6.0", require: false
   gem "better_errors"
   gem "binding_of_caller"
   gem "view_source_map", "0.0.3"
