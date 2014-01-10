@@ -1,0 +1,16 @@
+# https://gist.github.com/sue445/5261654
+
+ja:
+  helpers:
+    actions: "Actions"
+    links:
+      back: "戻る"
+      cancel: "キャンセル"
+      confirm: "本当にいいですか?"
+      destroy: "削除"
+      new: "新規"
+    titles:
+      edit: "編集"
+      save: "保存"
+      new: "新規"
+      delete: "削除"
