@@ -80,3 +80,5 @@ pickle-email-*.html
 /reports/
 /coverage/
 /db/schema.rb
+
+config/gitlab.yml
