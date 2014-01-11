@@ -56,9 +56,11 @@ end
 
 # testing
 group :test, :development do
-  gem "rspec-rails"
+  gem "rspec-rails", "~> 3.0.0.beta1"
+  gem "rspec-collection_matchers", "~> 0.0.2"
+  gem "rspec-its", "1.0.0.pre"
+  gem "rspec-parameterized", github: "sue445/rspec-parameterized", branch: "rspec-3.0.0.beta1"
   gem "factory_girl_rails", "~> 4.1.0"
-  gem "rspec-parameterized"
   gem "pry", "~> 0.9.10"
   gem "pry-remote", "~> 0.1.6"
   gem "pry-nav", "~> 0.2.3"
