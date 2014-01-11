@@ -121,7 +121,7 @@ GEM
       slop (~> 3.4)
     pry-nav (0.2.3)
       pry (~> 0.9.10)
-    pry-rails (0.2.2)
+    pry-rails (0.3.2)
       pry (>= 0.9.10)
     pry-remote (0.1.7)
       pry (~> 0.9)
@@ -255,10 +255,10 @@ DEPENDENCIES
   libv8 (~> 3.11.8)
   mysql2
   pg
-  pry (~> 0.9.10)
+  pry (~> 0.9.12.4)
   pry-nav (~> 0.2.3)
-  pry-rails (~> 0.2.2)
-  pry-remote (~> 0.1.6)
+  pry-rails (~> 0.3.2)
+  pry-remote (~> 0.1.7)
   rails (= 4.0.2)
   rspec-collection_matchers (~> 0.0.2)
   rspec-its (= 1.0.0.pre)
