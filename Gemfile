@@ -66,6 +66,7 @@ group :test, :development do
   gem "pry-nav", "~> 0.2.3"
   gem "pry-rails", "~> 0.2.2"
   gem "database_rewinder", "~> 0.0.2"
+  gem "webmock", "~> 1.16.1"
 end
 
 # Jenkins CI

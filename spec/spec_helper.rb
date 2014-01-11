@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'rspec-parameterized'
+require 'webmock/rspec'
 
 # for Jenkins CI
 begin
