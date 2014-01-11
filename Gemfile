@@ -85,3 +85,5 @@ gem "twitter-bootstrap-rails", github: "seyhunak/twitter-bootstrap-rails", branc
 gem "therubyracer", ">= 0.10.2", platform: :ruby
 
 gem "gitlab", "~> 3.0.0"
+gem "avatar", "~> 0.2.0"
+

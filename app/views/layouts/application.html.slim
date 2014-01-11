@@ -39,6 +39,10 @@ html lang="en"
               li
                 = link_to logout_path, alt: "logout", title: "logout" do
                   span.glyphicon.glyphicon-share
+              li
+                = link_to "#" do
+                  = avatar_tag(current_user, {size: 24}, class: "img-rounded")
+
     .container
       .row
         .col-lg-12
