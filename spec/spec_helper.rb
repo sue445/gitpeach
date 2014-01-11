@@ -1,14 +1,6 @@
 require 'rubygems'
 require 'rspec-parameterized'
 
-# ignore airbrake when running rspec
-# ref. https://github.com/airbrake/airbrake/wiki/Running-tests-with-Airbrake
-module Airbrake
-  def self.notify(exception, opts = {})
-    # do nothing.
-  end
-end
-
 # for Jenkins CI
 begin
   require 'simplecov'
