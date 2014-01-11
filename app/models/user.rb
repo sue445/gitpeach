@@ -16,6 +16,10 @@
 #
 
 class User < ActiveRecord::Base
+  def projects
+    gitlab.projects(page: 1, per_page: 100)
+  end
+
   private
   def gitlab
     Gitlab.client(private_token: self.private_token)
