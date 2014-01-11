@@ -21,19 +21,24 @@ html lang="en"
 
 
   body
-    .navbar.navbar-static-top
-      .container
-        button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse"
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-        a.navbar-brand href="/"
-          | Gitpeach
-        .nav-collapse.collapse.in.navbar-responsive-collapse
-          ul.nav.navbar-nav
-            li= link_to "Link 1", "/path1"
-            li= link_to "Link 2", "/path2"
-            li= link_to "Link 3", "/path3"
+    - if logged_in?
+      .navbar.navbar-static-top
+        .container
+          button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse"
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand href="/"
+            | Gitpeach
+          .nav-collapse.collapse.in.navbar-responsive-collapse
+            ul.nav.navbar-nav
+              li= link_to "Link 1", "/path1"
+              li= link_to "Link 2", "/path2"
+              li= link_to "Link 3", "/path3"
+            ul.nav.navbar-nav.pull-right
+              li
+                = link_to logout_path, alt: "logout", title: "logout" do
+                  span.glyphicon.glyphicon-share
     .container
       .row
         .col-lg-12
