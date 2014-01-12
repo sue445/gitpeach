@@ -56,7 +56,7 @@ class KanbansController < ApplicationController
   def destroy
     @kanban.destroy
     respond_to do |format|
-      format.html { redirect_to kanbans_url }
+      format.html { redirect_to root_url }
       format.json { head :no_content }
     end
   end
@@ -64,11 +64,11 @@ class KanbansController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_kanban
-      @kanban = Kanban.find(params[:id])
+      @kanban = Kanban.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def kanban_params
-      params.require(:kanban).permit(:gitlab_project_id, :name, :slug)
+      params.require(:kanban).permit(:gitlab_project_id, :name)
     end
 end

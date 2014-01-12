@@ -1,12 +1,22 @@
 h1 Projects
 
-table.table-striped.table-hover.table-bordered
+table.table
   tbody
     - current_user.projects.each do |project|
       tr
         td
-          = link_to(project.path_with_namespace, project.web_url)
+          = project.path_with_namespace
         td
-          | create kanban
-        td
-          | show kanban
+          - if Kanban.exists?(gitlab_project_id: project.id)
+            = link_to kanban_path(project.path_with_namespace), class: "btn btn-default" do
+              | Show Kanban
+            = link_to project.path_with_namespace, data: {:confirm => 'Are you sure?'}, class: "btn btn-danger", method: :delete do
+              span.glyphicon.glyphicon-trash
+              | Destroy Kanban
+          - else
+            = form_tag kanbans_path
+              = hidden_field_tag "kanban[gitlab_project_id]", project.id
+              = hidden_field_tag "kanban[name]", project.path_with_namespace
+              = button_tag type: "submit", class: "btn btn-primary" do
+                span.glyphicon.glyphicon-file
+                | Create Kanban

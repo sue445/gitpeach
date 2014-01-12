@@ -9,5 +9,6 @@ class CreateKanbans < ActiveRecord::Migration
     end
 
     add_index :kanbans, :slug, unique: true
+    add_index :kanbans, :name, unique: true
   end
 end

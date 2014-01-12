@@ -11,8 +11,15 @@
 #
 # Indexes
 #
+#  index_kanbans_on_name  (name) UNIQUE
 #  index_kanbans_on_slug  (slug) UNIQUE
 #
 
 class Kanban < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
+  def normalize_friendly_id(text)
+    text
+  end
 end

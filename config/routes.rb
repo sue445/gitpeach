@@ -1,6 +1,4 @@
 Gitpeach::Application.routes.draw do
-  resources :kanbans
-
   post "login"  => "sessions#create" , as: :login
   get  "logout" => "sessions#destroy", as: :logout
 
@@ -9,6 +7,9 @@ Gitpeach::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'top#index'
+
+  resources :kanbans, constraints: { id: /[a-zA-Z.0-9_\-]+\/[a-zA-Z.0-9_\-]+/ }, only: [:show, :edit, :create, :update, :destroy], path: "/" do
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
