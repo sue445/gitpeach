@@ -55,7 +55,7 @@ group :development do
   gem "view_source_map", "0.0.3"
 end
 
-group :test do
+group :test, :development do
   # testing
   gem "rspec-rails", "~> 3.0.0.beta1"
   gem "rspec-collection_matchers", "~> 0.0.2"
@@ -63,19 +63,20 @@ group :test do
   gem "rspec-parameterized", github: "sue445/rspec-parameterized", branch: "rspec-3.0.0.beta1"
   gem "factory_girl_rails", "~> 4.1.0"
   gem "database_rewinder", "~> 0.0.2"
-  gem "webmock", "~> 1.16.1"
 
   # Jenkins CI
   gem "simplecov", require: false
   gem "simplecov-rcov", require: false
   gem "ci_reporter", "~> 1.8.4"
-end
 
-group :test, :development do
   gem "pry"       , "~> 0.9.12.4"
   gem "pry-remote", "~> 0.1.7"
   gem "pry-nav"   , "~> 0.2.3"
   gem "pry-rails" , "~> 0.3.2"
+end
+
+group :test do
+  gem "webmock", "~> 1.16.1"
 end
 
 # twitter-bootstrap-rails
