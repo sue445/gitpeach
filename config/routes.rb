@@ -1,4 +1,6 @@
 Gitpeach::Application.routes.draw do
+  resources :kanbans
+
   post "login"  => "sessions#create" , as: :login
   get  "logout" => "sessions#destroy", as: :logout
 

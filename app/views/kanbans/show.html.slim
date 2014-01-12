@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Gitlab project:
+  = @kanban.gitlab_project_id
+p
+  strong Name:
+  = @kanban.name
+p
+  strong Slug:
+  = @kanban.slug
+
+= link_to 'Edit', edit_kanban_path(@kanban)
+'|
+= link_to 'Back', kanbans_path

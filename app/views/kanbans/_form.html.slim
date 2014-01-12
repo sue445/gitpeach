@@ -1,0 +1,18 @@
+= form_for @kanban do |f|
+  - if @kanban.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@kanban.errors.count, "error")} prohibited this kanban from being saved:"
+      ul
+        - @kanban.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :gitlab_project_id
+    = f.number_field :gitlab_project_id
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :slug
+    = f.text_field :slug
+  .actions = f.submit 'Save'

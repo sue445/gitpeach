@@ -1,0 +1,23 @@
+h1 Listing kanbans
+
+table
+  tr
+    th Gitlab project
+    th Name
+    th Slug
+    th
+    th
+    th
+
+  - @kanbans.each do |kanban|
+    tr
+      td = kanban.gitlab_project_id
+      td = kanban.name
+      td = kanban.slug
+      td = link_to 'Show', kanban
+      td = link_to 'Edit', edit_kanban_path(kanban)
+      td = link_to 'Destroy', kanban, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Kanban', new_kanban_path
