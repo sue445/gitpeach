@@ -1,3 +1,16 @@
 // Place all the styles related to the kanbans controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.issue {
+  position: relative;
+}
+
+.issue .assignee{
+  position: absolute;
+  top:      0px;
+  right:    0px;
+}
+
+.issue .note{
+  float: right;
+}

@@ -1,15 +1,26 @@
-p#notice = notice
+- content_for :title, @kanban.name
 
-p
-  strong Gitlab project:
-  = @kanban.gitlab_project_id
-p
-  strong Name:
-  = @kanban.name
-p
-  strong Slug:
-  = @kanban.slug
-/
-/= link_to 'Edit', edit_kanban_path(@kanban)
-/'|
-/= link_to 'Back', kanbans_path
+h1
+  = link_to @kanban.name, @user_kanban.project.web_url
+
+.row
+  - @kanban.labels.each do |label|
+    .col-md-3
+      h3
+        = label.name
+
+      - @user_kanban.issues.each do |issue|
+        .panel.panel-primary.issue
+          .panel-heading
+            h3.panel-title
+              = issue.iid || issue.iid
+              - if issue.assignee
+                = link_to "#" do
+                  = avatar_tag(issue.assignee, {size: 36}, class: "img-circle assignee")
+          .panel-body = issue.title
+          .panel-footer
+            - issue.labels.each do |label|
+              span.label.label-success
+                = label
+            = link_to "#{@user_kanban.issue_url(issue)}#notes", target: "_blank" do
+              span.glyphicon.glyphicon-comment.note
