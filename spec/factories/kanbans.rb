@@ -3,7 +3,6 @@
 FactoryGirl.define do
   factory :kanban do
     gitlab_project_id 1
-    name "MyString"
-    slug "MyString"
+    name { generate :random_str }
   end
 end

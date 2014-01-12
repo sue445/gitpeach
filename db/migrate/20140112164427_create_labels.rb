@@ -4,12 +4,13 @@ class CreateLabels < ActiveRecord::Migration
       t.integer :kanban_id
       t.string  :name
       t.string  :gitlab_label
+      t.integer :disp_order
       t.boolean :is_backlog_issue
       t.boolean :is_close_issue
 
       t.timestamps
     end
 
-    add_index :labels, [:kanban_id, :gitlab_label], unique: true
+    add_index :labels, [:kanban_id, :disp_order], unique: true
   end
 end
