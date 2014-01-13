@@ -24,4 +24,8 @@ class Label < ActiveRecord::Base
       {name: "In Progress", gitlab_label: "in progress", is_backlog_issue: false, is_close_issue: false},
       {name: "Done"       , gitlab_label: nil          , is_backlog_issue: false, is_close_issue: true},
   ]
+
+  scope :backlog, -> { where(is_backlog_issue: true , is_close_issue: false) }
+  scope :done   , -> { where(is_backlog_issue: false, is_close_issue: true) }
+  scope :other  , -> { where(is_backlog_issue: false, is_close_issue: false) }
 end

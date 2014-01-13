@@ -27,6 +27,18 @@ class Kanban < ActiveRecord::Base
     text
   end
 
+  # @return [Hash] key: label_id, value: issues
+  def issues_group_by_label(issues)
+    backlog_id = self.labels.backlog.first.id
+    done_id    = self.labels.done.first.id
+    issues.group_by{|issue|
+      next done_id   if issue.state == "closed"
+
+      not_backlog_label = self.labels.other.where(gitlab_label: issue.labels).first
+      not_backlog_label ? not_backlog_label.id : backlog_id
+    }
+  end
+
   private
   def create_default_labels
     Label::DEFAULTS.each_with_index do |params, index|
