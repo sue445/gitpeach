@@ -8,7 +8,7 @@ Gitpeach::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'top#index'
 
-  resources :kanbans, constraints: { id: /[a-zA-Z.0-9_\-]+\/[a-zA-Z.0-9_\-]+/ }, only: [:show, :edit, :create, :update, :destroy], path: "/" do
+  resources :kanbans, constraints: { id: /[a-zA-Z.0-9_\-]+\/[a-zA-Z.0-9_\-]+/ }, only: [:show, :create, :destroy], path: "/" do
   end
 
   # Example of regular route:

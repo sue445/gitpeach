@@ -1,30 +1,33 @@
 class KanbansController < ApplicationController
-  before_action :set_kanban, only: [:show, :edit, :update, :destroy]
+  before_action :set_kanban, only: [:show, :destroy]
 
   unless Rails.env.test?
     before_action :authenticate_user
     before_action :set_user_kanban, only: [:show]
   end
 
+  # TODO remove after
   # GET /kanbans
   # GET /kanbans.json
-  def index
-    @kanbans = Kanban.all
-  end
+  #def index
+  #  @kanbans = Kanban.all
+  #end
 
   # GET /kanbans/1
   # GET /kanbans/1.json
   def show
   end
 
+  # TODO remove after
   # GET /kanbans/new
-  def new
-    @kanban = Kanban.new
-  end
+  #def new
+  #  @kanban = Kanban.new
+  #end
 
+  # TODO remove after
   # GET /kanbans/1/edit
-  def edit
-  end
+  #def edit
+  #end
 
   # POST /kanbans
   # POST /kanbans.json
@@ -42,19 +45,20 @@ class KanbansController < ApplicationController
     end
   end
 
+  # TODO remove after
   # PATCH/PUT /kanbans/1
   # PATCH/PUT /kanbans/1.json
-  def update
-    respond_to do |format|
-      if @kanban.update(kanban_params)
-        format.html { redirect_to @kanban, notice: 'Kanban was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @kanban.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  #def update
+  #  respond_to do |format|
+  #    if @kanban.update(kanban_params)
+  #      format.html { redirect_to @kanban, notice: 'Kanban was successfully updated.' }
+  #      format.json { head :no_content }
+  #    else
+  #      format.html { render action: 'edit' }
+  #      format.json { render json: @kanban.errors, status: :unprocessable_entity }
+  #    end
+  #  end
+  #end
 
   # DELETE /kanbans/1
   # DELETE /kanbans/1.json
