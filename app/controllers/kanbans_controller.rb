@@ -1,6 +1,10 @@
 class KanbansController < ApplicationController
-  before_action :authenticate_user
   before_action :set_kanban, only: [:show, :edit, :update, :destroy]
+
+  unless Rails.env.test?
+    before_action :authenticate_user
+    before_action :set_user_kanban, only: [:show]
+  end
 
   # GET /kanbans
   # GET /kanbans.json
@@ -66,7 +70,10 @@ class KanbansController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_kanban
       @kanban = Kanban.friendly.find(params[:id])
-      @user_kanban = UserKanban.new(current_user, @kanban)
+    end
+
+    def set_user_kanban
+      @user_kanban = UserKanban.new(current_user, @kanban) if current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
