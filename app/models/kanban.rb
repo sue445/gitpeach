@@ -31,6 +31,7 @@ class Kanban < ActiveRecord::Base
   def issues_group_by_label(issues)
     backlog_id = self.labels.backlog.first.id
     done_id    = self.labels.done.first.id
+    issues ||= []
     issues.group_by{|issue|
       next done_id   if issue.state == "closed"
 

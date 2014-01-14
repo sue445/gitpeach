@@ -16,7 +16,7 @@ class KanbansController < ApplicationController
   # GET /kanbans/1
   # GET /kanbans/1.json
   def show
-    issues_group_by_label = @kanban.issues_group_by_label(@user_kanban.issues)
+    issues_group_by_label = @kanban.issues_group_by_label(project_issues)
 
     @label_groups = []
     @kanban.labels.each do |label|
@@ -92,5 +92,9 @@ class KanbansController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def kanban_params
       params.require(:kanban).permit(:gitlab_project_id, :name)
+    end
+
+    def project_issues
+      @user_kanban.issues
     end
 end

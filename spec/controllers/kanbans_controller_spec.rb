@@ -40,6 +40,10 @@ describe KanbansController do
   #end
 
   describe "GET show" do
+    before do
+      allow(controller).to receive(:project_issues).and_return([])
+    end
+
     it "assigns the requested kanban as @kanban" do
       kanban = Kanban.create! valid_attributes
       get :show, {:id => kanban.to_param}, valid_session
