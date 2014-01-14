@@ -5,22 +5,27 @@ h1
 
 .row
   - @label_groups.each do |label_group|
+    - label  = label_group[:label]
+    - issues = label_group[:issues]
     .col-md-3
       h3
-        = label_group[:label].name
+        = label.name
+        span.badge id="count_#{label.id}"
+          = issues.count
 
-      - label_group[:issues].each do |issue|
-        .panel.panel-primary.issue
-          .panel-heading
-            h3.panel-title
-              = issue.iid || issue.iid
-              - if issue.assignee
-                = link_to "#" do
-                  = avatar_tag(issue.assignee, {size: 36}, class: "img-circle assignee")
-          .panel-body = issue.title
-          .panel-footer
-            - issue.labels.each do |label|
-              span.label.label-success
-                = label
-            = link_to "#{@user_kanban.issue_url(issue)}#notes", target: "_blank" do
-              span.glyphicon.glyphicon-comment.note
+      div id="label_#{label.id}"
+        - issues.each do |issue|
+          .panel.panel-primary.issue id="issue_#{issue.id}"
+            .panel-heading
+              h3.panel-title
+                = issue.iid || issue.iid
+                - if issue.assignee
+                  = link_to "#" do
+                    = avatar_tag(issue.assignee, {size: 36}, class: "img-circle assignee")
+            .panel-body = issue.title
+            .panel-footer
+              - issue.labels.each do |label|
+                span.label.label-success
+                  = label
+              = link_to "#{@user_kanban.issue_url(issue)}#notes", target: "_blank" do
+                span.glyphicon.glyphicon-comment.note
