@@ -4,12 +4,12 @@ h1
   = link_to @kanban.name, @user_kanban.project.web_url
 
 .row
-  - @kanban.labels.each do |label|
+  - @label_groups.each do |label_group|
     .col-md-3
       h3
-        = label.name
+        = label_group[:label].name
 
-      - @user_kanban.issues.each do |issue|
+      - label_group[:issues].each do |issue|
         .panel.panel-primary.issue
           .panel-heading
             h3.panel-title

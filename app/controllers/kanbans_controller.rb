@@ -16,6 +16,15 @@ class KanbansController < ApplicationController
   # GET /kanbans/1
   # GET /kanbans/1.json
   def show
+    issues_group_by_label = @kanban.issues_group_by_label(@user_kanban.issues)
+
+    @label_groups = []
+    @kanban.labels.each do |label|
+      @label_groups << {
+          label:  label,
+          issues: issues_group_by_label[label.id] || []
+      }
+    end
   end
 
   # TODO remove after
