@@ -26,4 +26,7 @@
 //= require jquery.ui.droppable
 //= require jquery.ui.sortable
 //
+//= stub kanbans
+//= stub top
+//
 //= require_tree .

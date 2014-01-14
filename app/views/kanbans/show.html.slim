@@ -13,7 +13,7 @@ h1
         span.badge id="count_#{label.id}"
           = issues.count
 
-      div id="label_#{label.id}"
+      div.well.label-issues id="label_#{label.id}"
         - issues.each do |issue|
           .panel.panel-primary.issue-panel id="issue_#{issue.id}"
             .panel-heading
@@ -29,3 +29,5 @@ h1
                   = label
               = link_to "#{@user_kanban.issue_url(issue)}#notes", target: "_blank" do
                 span.glyphicon.glyphicon-comment.note
+
+= javascript_include_tag "kanbans"
