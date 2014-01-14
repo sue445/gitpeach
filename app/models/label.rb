@@ -28,4 +28,11 @@ class Label < ActiveRecord::Base
   scope :backlog, -> { where(is_backlog_issue: true , is_close_issue: false) }
   scope :done   , -> { where(is_backlog_issue: false, is_close_issue: true) }
   scope :other  , -> { where(is_backlog_issue: false, is_close_issue: false) }
+
+  before_save :normalize_gitlab_label
+
+  private
+  def normalize_gitlab_label
+    self.gitlab_label = nil if self.is_backlog_issue? || self.is_close_issue?
+  end
 end
