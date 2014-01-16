@@ -13,6 +13,8 @@ FactoryGirl.define do
   sequence(:random_url) { "http://"+ rand_str }
   sequence(:random_mail){ "#{rand_str}@#{rand_str}.com" }
 
+  sequence(:random_path) { rand_str + "/" + rand_str }
+
   sequence(:random_time){
     diff_day = 150 - rand(365)
     Time.now + diff_day

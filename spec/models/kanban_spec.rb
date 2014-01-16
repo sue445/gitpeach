@@ -109,4 +109,19 @@ describe Kanban do
       expect(@grouped_issue[done_id]).to have(4).items
     end
   end
+
+  describe "#update_gitlab_labels" do
+    subject{ kanban.update_gitlab_labels(gitlab_labels, from_label.id, to_label.id) }
+
+    let(:kanban) { FactoryGirl.create(:kanban) }
+
+    context "When other label -> other label" do
+      let(:gitlab_labels){ ["bug", "ready", "high"] }
+      let(:from_label)   { kanban.labels.other.find_by(gitlab_label: "ready") }
+      let(:to_label)     { kanban.labels.other.find_by(gitlab_label: "in progress") }
+
+      it{ should == ["bug", "in progress", "high"] }
+    end
+
+  end
 end

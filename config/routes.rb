@@ -9,7 +9,7 @@ Gitpeach::Application.routes.draw do
   root 'top#index'
 
   resources :kanbans, constraints: { id: /[a-zA-Z.0-9_\-]+\/[a-zA-Z.0-9_\-]+/ }, only: [:show, :create, :destroy], path: "/" do
-    resources :issues, constraints: {id: /\d+/}, only: [:update, :destroy] do
+    resources :issues, constraints: {id: /\d+/}, only: [:update] do
 
     end
   end

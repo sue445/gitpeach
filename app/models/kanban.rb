@@ -40,6 +40,14 @@ class Kanban < ActiveRecord::Base
     }
   end
 
+  # @param gitlab_labels   [Array<String>]
+  # @param from_label_id   [Integer]
+  # @param to_label_id     [Integer]
+  # @return [Array<String>]
+  def update_gitlab_labels(gitlab_labels, from_label_id, to_label_id)
+
+  end
+
   private
   def create_default_labels
     Label::DEFAULTS.each_with_index do |params, index|

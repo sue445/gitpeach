@@ -9,11 +9,12 @@ class IssuesController < ApplicationController
   def update
   end
 
-  def destroy
-  end
-
   private
     def set_kanban
       @kanban = Kanban.friendly.find(params[:kanban_id])
+    end
+
+    def set_user_kanban
+      @user_kanban = UserKanban.new(current_user, @kanban) if current_user
     end
 end
