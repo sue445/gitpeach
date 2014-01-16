@@ -3,17 +3,19 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).ready ->
   $(".issue-panel").draggable(
-    scope:  "label-issues"
+    scope:  "issue-column-scope"
     revert: "invalid"
     stack:  "issue-panel"
     cursor: "move"
     snap:   true
-    stop: ->
-      console.log "stop"
+    handle: ".issue-panel__header"
+    start: (event, ui) ->
+      drag_manager.drag_start(event, ui)
+    stop: (event, ui) ->
+      drag_manager.drag_end(event, ui)
   )
 
-  $(".label-issues").droppable(
-    activeClass: "grep"
-    scope: "label-issues"
+  $(".issue-column").droppable(
+    scope: "issue-column-scope"
     tolerance: "fit"
   )

@@ -1,7 +1,7 @@
 // Place all the styles related to the kanbans controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.label-issues {
+.issue-column {
   min-height: 800px;
   z-index: 10;
 }
@@ -11,12 +11,16 @@
   z-index: 50;
 }
 
-.issue-panel .assignee{
+.issue-panel .issue-panel__header{
+  cursor: move;
+}
+
+.issue-panel .issue-panel__assignee{
   position: absolute;
   top:      0px;
   right:    0px;
 }
 
-.issue-panel .note{
+.issue-panel .issue-panel__note{
   float: right;
 }

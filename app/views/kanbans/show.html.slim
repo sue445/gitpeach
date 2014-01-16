@@ -13,21 +13,21 @@ h1
         span.badge id="count_#{label.id}"
           = issues.count
 
-      div.well.label-issues id="label_#{label.id}"
+      div.well.issue-column id="label_#{label.id}"
         - issues.each do |issue|
           .panel.panel-primary.issue-panel id="issue_#{issue.id}"
-            .panel-heading
+            .panel-heading.issue-panel__header
               h3.panel-title
                 = issue.iid || issue.iid
                 - if issue.assignee
                   = link_to "#" do
-                    = avatar_tag(issue.assignee, {size: 36}, class: "img-circle assignee")
+                    = avatar_tag(issue.assignee, {size: 36}, class: "img-circle issue-panel__assignee")
             .panel-body = issue.title
             .panel-footer
               - issue.labels.each do |label|
                 span.label.label-success
                   = label
               = link_to "#{@user_kanban.issue_url(issue)}#notes", target: "_blank" do
-                span.glyphicon.glyphicon-comment.note
+                span.glyphicon.glyphicon-comment.issue-panel__note
 
 = javascript_include_tag "kanbans"
