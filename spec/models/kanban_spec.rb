@@ -111,16 +111,42 @@ describe Kanban do
   end
 
   describe "#update_gitlab_labels" do
-    subject{ kanban.update_gitlab_labels(gitlab_labels, from_label.id, to_label.id) }
+    subject{ kanban.update_gitlab_labels(gitlab_labels, @from_label.id, @to_label.id) }
 
-    let(:kanban) { FactoryGirl.create(:kanban) }
+    let(:kanban){ FactoryGirl.create(:kanban) }
 
-    context "When other label -> other label" do
-      let(:gitlab_labels){ ["bug", "ready", "high"] }
-      let(:from_label)   { kanban.labels.other.find_by(gitlab_label: "ready") }
-      let(:to_label)     { kanban.labels.other.find_by(gitlab_label: "in progress") }
+    where(:gitlab_labels, :from_label_name, :to_label_name, :expected) do
+      [
+          # backlog -> backlog
+          [ ["bug", "high"]           , "Backlog", "Backlog"    , ["bug", "high"] ],
+          # backlog -> other
+          [ ["bug", "high"]           , "Backlog", "In Progress", ["bug", "in progress", "high"] ],
+          # backlog -> done
+          [ ["bug", "high"]           , "Backlog", "Done"       , ["bug", "high"] ],
+          # other -> backlog
+          [ ["bug", "ready", "high"]  , "Ready", "Backlog"      , ["bug", "high"] ],
+          # other -> other
+          [ ["bug", "ready", "high"]  , "Ready", "Ready"        , ["bug", "ready", "high"] ],
+          # other -> other2
+          [ ["bug", "ready", "high"]  , "Ready", "In Progress"  , ["bug", "in progress", "high"] ],
+          # other -> done
+          [ ["bug", "ready", "high"]  , "Ready", "Done"         , ["bug", "high"] ],
+          # done -> backlog
+          [ ["bug", "high"]           , "Done", "Backlog"       , ["bug", "high"] ],
+          # done -> other
+          [ ["bug", "high"]           , "Done", "Ready"         , ["bug", "ready", "high"] ],
+          # done -> done
+          [ ["bug", "high"]           , "Done", "Done"          , ["bug", "high"] ],
+      ]
+    end
 
-      it{ should == ["bug", "in progress", "high"] }
+    with_them do
+      before do
+        @from_label = kanban.labels.find_by!(name: from_label_name)
+        @to_label   = kanban.labels.find_by!(name: to_label_name)
+      end
+
+      it{ should =~ expected }
     end
 
   end

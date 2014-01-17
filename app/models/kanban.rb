@@ -45,7 +45,21 @@ class Kanban < ActiveRecord::Base
   # @param to_label_id     [Integer]
   # @return [Array<String>]
   def update_gitlab_labels(gitlab_labels, from_label_id, to_label_id)
+    from_label = self.labels.find(from_label_id)
+    to_label   = self.labels.find(to_label_id)
 
+    updated_labels = []
+    updated_labels << to_label.gitlab_label if from_label.is_backlog_issue? || from_label.is_close_issue?
+
+    gitlab_labels.each do |gitlab_label|
+      if gitlab_label == from_label.gitlab_label
+        updated_labels << to_label.gitlab_label
+      else
+        updated_labels << gitlab_label
+      end
+    end
+
+    updated_labels.compact
   end
 
   private
