@@ -30,4 +30,6 @@ h1
               = link_to "#{@user_kanban.issue_url(issue)}#notes", target: "_blank" do
                 span.glyphicon.glyphicon-comment.issue-panel__note
 
+= hidden_field_tag :kanban_name, @kanban.name
+
 = javascript_include_tag "kanbans"
