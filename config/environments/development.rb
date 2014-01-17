@@ -27,3 +27,6 @@ Gitpeach::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 end
+
+# indent slim view
+Slim::Engine.set_default_options pretty: true
