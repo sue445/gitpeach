@@ -11,8 +11,10 @@ $(document).ready ->
     handle: ".issue-panel__header"
     start: (event, ui) ->
       drag_manager.drag_start(event, ui)
+      null
     stop: (event, ui) ->
       drag_manager.drag_end(event, ui)
+      null
   )
 
   $(".issue-column").droppable(

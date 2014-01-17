@@ -4,9 +4,16 @@ var drag_manager = (function(){
   // instance variables
   var target_id = null;
 
+  // same to kanban.css.scss
+  var issue_panel_default_z_index = 50;
+
   // public methods
   function drag_start(event, ui){
     target_id = event.target.id;
+
+    var target = $("#" + target_id);
+    $(".ui-draggable").css("z-index", issue_panel_default_z_index);
+    target.css("z-index", 100);
   }
 
   function drag_end(event, ui){
@@ -46,14 +53,10 @@ var drag_manager = (function(){
     var corner_positions = get_corner_positions(position.left, position.top, size.width, size.height);
     var conflict = false;
 
-    console.log("corner_positions", corner_positions);
-
     $(targets).each(function(i, v){
 //      var target_position = $(v).position();
       var target_position = $(v).get(0).getBoundingClientRect();
       var target_corner_positions = get_corner_positions(target_position.left, target_position.top, $(v).width(), $(v).height());
-
-      console.log("target_corner_positions", target_corner_positions);
 
       $(corner_positions).each(function(j, o){
         if(o.left >= target_corner_positions[0].left - 15
