@@ -16,13 +16,27 @@ describe IssuesController do
     let(:issue_id){ 1 }
     let(:kanban)  { FactoryGirl.create(:kanban) }
 
-    let(:from_label){ kanban.labels.other.find_by(gitlab_label: "ready") }
-    let(:to_label)  { kanban.labels.other.find_by(gitlab_label: "in progress") }
+    let(:from_label){ kanban.labels.backlog.first! }
+    let(:to_label)  { kanban.labels.done.first! }
 
-    it "should update gitlab issue" do
-      pending "do after"
+    before do
+      expect(controller).to receive(:gitlab_issue_labels){ %w(bug high) }
+      expect(controller).to receive(:update_gitlab_issue)
+    end
+
+    it "should be success" do
       subject
-      # TODO
+      expect(response).to be_success
+    end
+
+    it "should update labels" do
+      subject
+      expect(assigns(:labels)).to eq %w(bug high)
+    end
+
+    it "should update state" do
+      subject
+      expect(assigns(:state)).to  eq "closed"
     end
   end
 end

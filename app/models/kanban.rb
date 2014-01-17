@@ -44,7 +44,7 @@ class Kanban < ActiveRecord::Base
   # @param from_label_id   [Integer]
   # @param to_label_id     [Integer]
   # @return [Array<String>]
-  def update_gitlab_labels(gitlab_labels, from_label_id, to_label_id)
+  def update_gitlab_issue_labels(gitlab_labels, from_label_id, to_label_id)
     from_label = self.labels.find(from_label_id)
     to_label   = self.labels.find(to_label_id)
 
@@ -60,6 +60,21 @@ class Kanban < ActiveRecord::Base
     end
 
     updated_labels.compact
+  end
+
+  def gitlab_issue_state(from_label_id, to_label_id)
+    from_label = self.labels.find(from_label_id)
+    to_label   = self.labels.find(to_label_id)
+
+    if to_label.is_close_issue?
+      "closed"
+    else
+      if from_label.is_close_issue?
+        "reopened"
+      else
+        "opened"
+      end
+    end
   end
 
   private

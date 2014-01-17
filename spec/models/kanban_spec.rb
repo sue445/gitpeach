@@ -110,8 +110,8 @@ describe Kanban do
     end
   end
 
-  describe "#update_gitlab_labels" do
-    subject{ kanban.update_gitlab_labels(gitlab_labels, @from_label.id, @to_label.id) }
+  describe "#update_gitlab_issue_labels" do
+    subject{ kanban.update_gitlab_issue_labels(gitlab_labels, @from_label.id, @to_label.id) }
 
     let(:kanban){ FactoryGirl.create(:kanban) }
 
@@ -147,6 +147,35 @@ describe Kanban do
       end
 
       it{ should =~ expected }
+    end
+
+  end
+
+  describe "#gitlab_issue_state" do
+    subject{ kanban.gitlab_issue_state(@from_label.id, @to_label.id) }
+
+    let(:kanban){ FactoryGirl.create(:kanban) }
+
+    where(:from_label_name, :to_label_name, :expected) do
+      [
+          # opened -> opened
+          ["Ready", "In Progress", "opened"],
+          # opened -> closed
+          ["Ready", "Done"       , "closed"],
+          # closed -> reopened
+          ["Done" , "Ready"      , "reopened"],
+          # closed -> closed
+          ["Done" , "Done"       , "closed"],
+      ]
+    end
+
+    with_them do
+      before do
+        @from_label = kanban.labels.find_by!(name: from_label_name)
+        @to_label   = kanban.labels.find_by!(name: to_label_name)
+      end
+
+      it{ should == expected }
     end
 
   end
