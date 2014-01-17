@@ -5,6 +5,15 @@ class IssuesController < ApplicationController
     before_action :authenticate_user
     before_action :set_user_kanban
     before_action :set_issue, only: [:update]
+
+    rescue_from StandardError do |exception|
+      response = {
+          status:    :error,
+          exception: exception.class.to_s,
+          message:   exception.message
+      }
+      render json: response, status: 500
+    end
   end
 
   def update
@@ -13,7 +22,8 @@ class IssuesController < ApplicationController
 
     update_gitlab_issue(@labels, @state)
 
-    render nothing: true, statue: 200
+    response = {status: :success}
+    render json: response, status: 200
   end
 
   private

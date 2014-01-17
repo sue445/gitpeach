@@ -4,12 +4,15 @@ var drag_manager = (function(){
   // instance variables
   var target_id = null;
 
+  var original_ui = null;
+
   // same to kanban.css.scss
   var issue_panel_default_z_index = 50;
 
   // public methods
   function drag_start(event, ui){
     target_id = event.target.id;
+    original_ui = ui;
 
     var target = $("#" + target_id);
     $(".ui-draggable").css("z-index", issue_panel_default_z_index);
@@ -33,19 +36,26 @@ var drag_manager = (function(){
     );
 
     if(is_conflict){
-      target.css({
-        left: ui.originalPosition.left,
-        top:  ui.originalPosition.top
-      });
+      rollback();
       return false;
     }
 
     return true;
   }
 
+  function rollback(){
+    var target = $("#" + target_id);
+
+    target.css({
+      left: original_ui.originalPosition.left,
+      top:  original_ui.originalPosition.top
+    });
+  }
+
   return {
     drag_start: drag_start,
-    drag_end:   drag_end
+    drag_end:   drag_end,
+    rollback:   rollback
   };
 
   // private methods

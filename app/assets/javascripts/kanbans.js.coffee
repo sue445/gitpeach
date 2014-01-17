@@ -20,9 +20,9 @@ $(document).ready ->
           url: "/" + $("#kanban_name").val() + "/issues/" + issue_id
           method: "PUT"
           success: (data, data_type) ->
-            alert("success")
+            util.alert("success")
           error: ->
-            alert("error")
+            drag_manager.rollback()
         )
       null
   )
