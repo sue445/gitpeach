@@ -7,6 +7,7 @@ class IssuesController < ApplicationController
     before_action :set_issue, only: [:update]
 
     rescue_from StandardError do |exception|
+      Rails.logger.error exception.full_backtrace
       response = {
           status:    :error,
           exception: exception.class.to_s,
@@ -17,8 +18,11 @@ class IssuesController < ApplicationController
   end
 
   def update
-    @labels = @kanban.update_gitlab_issue_labels(gitlab_issue_labels, params[:from_label_id], params[:to_label_id])
-    @state = @kanban.gitlab_issue_state(params[:from_label_id], params[:to_label_id])
+    raise ArgumentError, "require to_label_id" unless params[:to_label_id]
+
+    from_label_id = gitlab_current_issue_label_id
+    @labels = @kanban.update_gitlab_issue_labels(gitlab_issue_labels, from_label_id, params[:to_label_id])
+    @state  = @kanban.gitlab_issue_state(from_label_id, params[:to_label_id])
 
     update_gitlab_issue(@labels, @state)
 
@@ -43,7 +47,11 @@ class IssuesController < ApplicationController
       @issue.labels
     end
 
-    def update_gitlab_issue(labels, state)
+    def gitlab_current_issue_label_id
+      @kanban.issue_label_id(@issue)
+    end
 
+    def update_gitlab_issue(labels, state_event)
+      @user_kanban.update_issue(@issue.id, labels, state_event)
     end
 end

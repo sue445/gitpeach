@@ -8,7 +8,6 @@ describe IssuesController do
       {
           id:              issue_id,
           kanban_id:       kanban.name,
-          from_label_id:   from_label.id,
           to_label_id:     to_label.id,
       }
     }
@@ -20,6 +19,7 @@ describe IssuesController do
     let(:to_label)  { kanban.labels.done.first! }
 
     before do
+      expect(controller).to receive(:gitlab_current_issue_label_id){ from_label.id }
       expect(controller).to receive(:gitlab_issue_labels){ %w(bug high) }
       expect(controller).to receive(:update_gitlab_issue)
     end

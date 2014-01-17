@@ -14,7 +14,7 @@ h1
         span.badge id="count_#{label.id}"
           = issues.count
 
-      div.well.issue-column id="label_#{label.id}"
+      div.well.label-column id="label_#{label.id}"
         - issues.each do |issue|
           .panel.panel-primary.issue-panel id="issue_#{issue.id}"
             .panel-heading.issue-panel__header

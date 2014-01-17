@@ -159,13 +159,13 @@ describe Kanban do
     where(:from_label_name, :to_label_name, :expected) do
       [
           # opened -> opened
-          ["Ready", "In Progress", "opened"],
+          ["Ready", "In Progress", nil],
           # opened -> closed
-          ["Ready", "Done"       , "closed"],
+          ["Ready", "Done"       , "close"],
           # closed -> reopened
-          ["Done" , "Ready"      , "reopened"],
+          ["Done" , "Ready"      , "reopen"],
           # closed -> closed
-          ["Done" , "Done"       , "closed"],
+          ["Done" , "Done"       , nil],
       ]
     end
 

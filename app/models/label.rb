@@ -31,6 +31,14 @@ class Label < ActiveRecord::Base
 
   before_save :normalize_gitlab_label
 
+  def closed?
+    self.is_close_issue?
+  end
+
+  def opened?
+    !self.closed?
+  end
+
   private
   def normalize_gitlab_label
     self.gitlab_label = nil if self.is_backlog_issue? || self.is_close_issue?

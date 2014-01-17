@@ -19,4 +19,12 @@ class UserKanban
     issue_id = issue.iid || issue.id
     "#{@project.web_url}/issues/#{issue_id}"
   end
+
+  def update_issue(issue_id, labels, state_event)
+    options = {
+        labels: labels.join(",")
+    }
+    options[:state_event] = state_event if state_event
+    @user.gitlab.edit_issue(@project.id, issue_id, options)
+  end
 end

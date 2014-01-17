@@ -32,12 +32,17 @@ class Kanban < ActiveRecord::Base
     backlog_id = self.labels.backlog.first.id
     done_id    = self.labels.done.first.id
     issues ||= []
-    issues.group_by{|issue|
-      next done_id   if issue.state == "closed"
+    issues.group_by{|issue| issue_label_id(issue) }
+  end
 
+  # @return [Integer] label_id
+  def issue_label_id(issue)
+    if issue.state == "closed"
+      self.labels.done.first.id
+    else
       not_backlog_label = self.labels.other.where(gitlab_label: issue.labels).first
-      not_backlog_label ? not_backlog_label.id : backlog_id
-    }
+      not_backlog_label ? not_backlog_label.id : self.labels.backlog.first.id
+    end
   end
 
   # @param gitlab_labels   [Array<String>]
@@ -66,14 +71,13 @@ class Kanban < ActiveRecord::Base
     from_label = self.labels.find(from_label_id)
     to_label   = self.labels.find(to_label_id)
 
-    if to_label.is_close_issue?
-      "closed"
+    if from_label.opened? && to_label.closed?
+      "close"
+    elsif from_label.closed? && to_label.opened?
+      "reopen"
     else
-      if from_label.is_close_issue?
-        "reopened"
-      else
-        "opened"
-      end
+      # send "open" to "opened" issue (or send "close" to "closed" issue), 404 error at gitlab v6.4.3
+      nil
     end
   end
 
