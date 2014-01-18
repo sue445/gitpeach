@@ -18,11 +18,19 @@ class KanbansController < ApplicationController
   def show
     issues_group_by_label = @kanban.issues_group_by_label(project_issues)
 
+    done_label = @kanban.labels.done.first
+
     @label_groups = []
     @kanban.labels.each do |label|
+      issues = issues_group_by_label[label.id] || []
+      if label == done_label
+        # reject old closed tasks
+        issues = issues.reject{|issue| issue.created_at < 1.week.ago }
+      end
+
       @label_groups << {
           label:  label,
-          issues: issues_group_by_label[label.id] || []
+          issues: issues
       }
     end
   end

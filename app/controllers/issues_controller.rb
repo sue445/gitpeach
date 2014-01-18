@@ -26,8 +26,8 @@ class IssuesController < ApplicationController
 
     update_gitlab_issue(@labels, @state)
 
-    response = {status: :success}
-    render json: response, status: 200
+    updated_issue = @user_kanban.issue(params[:id])
+    render json: updated_issue, status: 200
   end
 
   private

@@ -10,8 +10,14 @@ h1
     - issues = label_group[:issues]
     .col-md-3
       h3
+        - if label.is_backlog_issue?
+          span.glyphicon.glyphicon-tasks
+        - if label.is_close_issue?
+          span.glyphicon.glyphicon-ok
+
         = label.name
         span.badge id="count_#{label.id}"
+          = issues.count
 
       div.well.label-column id="label_#{label.id}"
         - issues.each do |issue|
@@ -20,14 +26,16 @@ h1
               h3.panel-title
                 = issue.iid || issue.iid
                 - if issue.assignee
-                  = link_to "#" do
-                    = avatar_tag(issue.assignee, {size: 36}, class: "img-circle issue-panel__assignee")
-            .panel-body = issue.title
+                  = avatar_tag(issue.assignee, {size: 36}, class: "img-circle issue-panel__assignee")
+            .panel-body
+              = link_to @user_kanban.issue_url(issue) do
+                = issue.title
             .panel-footer
-              - issue.labels.each do |label|
-                span.label.label-success
-                  = label
-              = link_to "#{@user_kanban.issue_url(issue)}#notes", target: "_blank" do
+              .issue-panel__labels
+                - issue.labels.each do |label|
+                  span.label.label-success
+                    = label
+              = link_to "#{@user_kanban.issue_url(issue)}#notes" do
                 span.glyphicon.glyphicon-comment.issue-panel__note
 
 = hidden_field_tag :kanban_name, @kanban.name
