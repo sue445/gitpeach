@@ -9,6 +9,11 @@ Gitpeach::Application.routes.draw do
   root 'top#index'
 
   resources :kanbans, constraints: { id: /[a-zA-Z.0-9_\-]+\/[a-zA-Z.0-9_\-]+/ }, only: [:show, :create, :destroy], path: "/" do
+    member do
+      # for API using (.json is contained to id)
+      get :labels, to: "kanbans#show"
+    end
+
     resources :issues, constraints: {id: /\d+/}, only: [:update] do
 
     end
