@@ -26,7 +26,6 @@ class IssuesController < ApplicationController
 
     update_gitlab_issue(@labels, @state)
 
-    updated_issue = @user_kanban.issue(params[:id])
     render json: updated_issue, status: 200
   end
 
@@ -53,5 +52,9 @@ class IssuesController < ApplicationController
 
     def update_gitlab_issue(labels, state_event)
       @user_kanban.update_issue(@issue.id, labels, state_event)
+    end
+
+    def updated_issue
+      @user_kanban.issue(params[:id])
     end
 end

@@ -22,6 +22,7 @@ describe IssuesController do
       expect(controller).to receive(:gitlab_current_issue_label_id){ from_label.id }
       expect(controller).to receive(:gitlab_issue_labels){ %w(bug high) }
       expect(controller).to receive(:update_gitlab_issue)
+      expect(controller).to receive(:updated_issue)      { {} }
     end
 
     it "should be success" do
@@ -36,7 +37,7 @@ describe IssuesController do
 
     it "should update state" do
       subject
-      expect(assigns(:state)).to  eq "closed"
+      expect(assigns(:state)).to  eq "close"
     end
   end
 end
