@@ -110,15 +110,18 @@ describe KanbansController do
 
     let(:params) do
       {
-          id: kanban.name,
-          labels: [
-              {name: "TODO"       , gitlab_label: nil          , is_backlog_issue: true , is_close_issue: false, id: backlog.id},
-              {name: "Pending"    , gitlab_label: "pending"    , is_backlog_issue: false, is_close_issue: false},
-              {name: "Ready"      , gitlab_label: "ready5"     , is_backlog_issue: false, is_close_issue: false, id: ready.id},
-              {name: "In Progress", gitlab_label: "in progress", is_backlog_issue: false, is_close_issue: false, id: in_progress.id},
-              {name: "Done"       , gitlab_label: nil          , is_backlog_issue: false, is_close_issue: true , id: done.id},
-          ]
+          id:     kanban.name,
+          labels: labels,
       }
+    end
+
+    let(:labels) do
+      [
+          {name: "Backlog"    , gitlab_label: nil          , is_backlog_issue: true , is_close_issue: false, id: backlog.id},
+          {name: "Ready"      , gitlab_label: "ready"      , is_backlog_issue: false, is_close_issue: false, id: ready.id},
+          {name: "In Progress", gitlab_label: "in progress", is_backlog_issue: false, is_close_issue: false, id: in_progress.id},
+          {name: "Done"       , gitlab_label: nil          , is_backlog_issue: false, is_close_issue: true , id: done.id},
+      ]
     end
 
     let!(:kanban)    { FactoryGirl.create(:kanban) }
@@ -132,21 +135,53 @@ describe KanbansController do
       expect(response).to be_redirect
     end
 
-    it "should create new label" do
-      expect{ subject }.to change(Label, :count).by(1)
+    context "When update label" do
+      before do
+        labels[0][:name]         = "TODO"
+        labels[1][:gitlab_label] = "ready5"
+      end
+
+      it "should update label#name" do
+        expect{ subject }.to change{ Label.find(backlog.id).name }.from("Backlog").to("TODO")
+      end
+
+      it "should update label#gitlab_label" do
+        expect{ subject }.to change{ Label.find(ready.id).gitlab_label }.from("ready").to("ready5")
+      end
     end
 
-    it "should update label#name" do
-      expect{ subject }.to change{ Label.find(backlog.id).name }.from("Backlog").to("TODO")
+    context "When add new label" do
+      before do
+        labels.insert(1, new_label)
+      end
+
+      let(:new_label) do
+        {name: "Pending", gitlab_label: "pending", is_backlog_issue: false, is_close_issue: false}
+      end
+
+      it "should create new label" do
+        expect{ subject }.to change(Label, :count).by(1)
+      end
+
+      it "should update label#disp_order" do
+        expect{ subject }.to change{ Label.find(done.id).disp_order }.from(3).to(4)
+      end
     end
 
-    it "should update label#gitlab_label" do
-      expect{ subject }.to change{ Label.find(ready.id).gitlab_label }.from("ready").to("ready5")
+    context "When swap labels" do
+      before do
+        labels[0], labels[1] = labels[1], labels[0]
+      end
+
+      it "should update label#disp_order" do
+        expect{ subject }.to change{ Label.find(backlog.id).disp_order }.from(0).to(1)
+      end
+
+      it "should update label#disp_order" do
+        expect{ subject }.to change{ Label.find(ready.id).disp_order }.from(1).to(0)
+      end
     end
 
-    it "should update label#disp_order" do
-      expect{ subject }.to change{ Label.find(done.id).disp_order }.from(3).to(4)
-    end
 
     #describe "with valid params" do
     #  it "updates the requested kanban" do
