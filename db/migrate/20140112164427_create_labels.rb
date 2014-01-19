@@ -11,6 +11,6 @@ class CreateLabels < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :labels, [:kanban_id, :disp_order], unique: true
+    add_index :labels, [:kanban_id, :disp_order]
   end
 end

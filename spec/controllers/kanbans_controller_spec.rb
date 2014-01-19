@@ -105,50 +105,91 @@ describe KanbansController do
     end
   end
 
-  # TODO remove after
-  #describe "PUT update" do
-  #  describe "with valid params" do
-  #    it "updates the requested kanban" do
-  #      kanban = Kanban.create! valid_attributes
-  #      # Assuming there are no other kanbans in the database, this
-  #      # specifies that the Kanban created on the previous line
-  #      # receives the :update_attributes message with whatever params are
-  #      # submitted in the request.
-  #      allow_any_instance_of(Kanban).to receive(:update).with({ "gitlab_project_id" => "1" })
-  #      put :update, {:id => kanban.to_param, :kanban => { "gitlab_project_id" => "1" }}, valid_session
-  #    end
-  #
-  #    it "assigns the requested kanban as @kanban" do
-  #      kanban = Kanban.create! valid_attributes
-  #      put :update, {:id => kanban.to_param, :kanban => valid_attributes}, valid_session
-  #      expect(assigns(:kanban)).to eq(kanban)
-  #    end
-  #
-  #    it "redirects to the kanban" do
-  #      kanban = Kanban.create! valid_attributes
-  #      put :update, {:id => kanban.to_param, :kanban => valid_attributes}, valid_session
-  #      expect(response).to redirect_to(kanban)
-  #    end
-  #  end
-  #
-  #  describe "with invalid params" do
-  #    it "assigns the kanban as @kanban" do
-  #      kanban = Kanban.create! valid_attributes
-  #      # Trigger the behavior that occurs when invalid params are submitted
-  #      allow_any_instance_of(Kanban).to receive(:save).and_return(false)
-  #      put :update, {:id => kanban.to_param, :kanban => { "gitlab_project_id" => "invalid value" }}, valid_session
-  #      expect(assigns(:kanban)).to eq(kanban)
-  #    end
-  #
-  #    it "re-renders the 'edit' template" do
-  #      kanban = Kanban.create! valid_attributes
-  #      # Trigger the behavior that occurs when invalid params are submitted
-  #      allow_any_instance_of(Kanban).to receive(:save).and_return(false)
-  #      put :update, {:id => kanban.to_param, :kanban => { "gitlab_project_id" => "invalid value" }}, valid_session
-  #      expect(response).to render_template("edit")
-  #    end
-  #  end
-  #end
+  describe "PUT update" do
+    subject{ put :update, params }
+
+    let(:params) do
+      {
+          id: kanban.name,
+          labels: [
+              {name: "TODO"       , gitlab_label: nil          , is_backlog_issue: true , is_close_issue: false, id: backlog.id},
+              {name: "Pending"    , gitlab_label: "pending"    , is_backlog_issue: false, is_close_issue: false},
+              {name: "Ready"      , gitlab_label: "ready5"     , is_backlog_issue: false, is_close_issue: false, id: ready.id},
+              {name: "In Progress", gitlab_label: "in progress", is_backlog_issue: false, is_close_issue: false, id: in_progress.id},
+              {name: "Done"       , gitlab_label: nil          , is_backlog_issue: false, is_close_issue: true , id: done.id},
+          ]
+      }
+    end
+
+    let!(:kanban)    { FactoryGirl.create(:kanban) }
+    let(:backlog)    { kanban.labels.backlog.first }
+    let(:ready)      { kanban.labels.other.where(name: "Ready").first }
+    let(:in_progress){ kanban.labels.other.where(name: "In Progress").first }
+    let(:done)       { kanban.labels.done.first }
+
+    it "should be redirect" do
+      subject
+      expect(response).to be_redirect
+    end
+
+    it "should create new label" do
+      expect{ subject }.to change(Label, :count).by(1)
+    end
+
+    it "should update label#name" do
+      expect{ subject }.to change{ Label.find(backlog.id).name }.from("Backlog").to("TODO")
+    end
+
+    it "should update label#gitlab_label" do
+      expect{ subject }.to change{ Label.find(ready.id).gitlab_label }.from("ready").to("ready5")
+    end
+
+    it "should update label#disp_order" do
+      expect{ subject }.to change{ Label.find(done.id).disp_order }.from(3).to(4)
+    end
+
+    #describe "with valid params" do
+    #  it "updates the requested kanban" do
+    #    kanban = Kanban.create! valid_attributes
+    #    # Assuming there are no other kanbans in the database, this
+    #    # specifies that the Kanban created on the previous line
+    #    # receives the :update_attributes message with whatever params are
+    #    # submitted in the request.
+    #    allow_any_instance_of(Kanban).to receive(:update).with({ "gitlab_project_id" => "1" })
+    #    put :update, {:id => kanban.to_param, :kanban => { "gitlab_project_id" => "1" }}, valid_session
+    #  end
+    #
+    #  it "assigns the requested kanban as @kanban" do
+    #    kanban = Kanban.create! valid_attributes
+    #    put :update, {:id => kanban.to_param, :kanban => valid_attributes}, valid_session
+    #    expect(assigns(:kanban)).to eq(kanban)
+    #  end
+    #
+    #  it "redirects to the kanban" do
+    #    kanban = Kanban.create! valid_attributes
+    #    put :update, {:id => kanban.to_param, :kanban => valid_attributes}, valid_session
+    #    expect(response).to redirect_to(kanban)
+    #  end
+    #end
+    #
+    #describe "with invalid params" do
+    #  it "assigns the kanban as @kanban" do
+    #    kanban = Kanban.create! valid_attributes
+    #    # Trigger the behavior that occurs when invalid params are submitted
+    #    allow_any_instance_of(Kanban).to receive(:save).and_return(false)
+    #    put :update, {:id => kanban.to_param, :kanban => { "gitlab_project_id" => "invalid value" }}, valid_session
+    #    expect(assigns(:kanban)).to eq(kanban)
+    #  end
+    #
+    #  it "re-renders the 'edit' template" do
+    #    kanban = Kanban.create! valid_attributes
+    #    # Trigger the behavior that occurs when invalid params are submitted
+    #    allow_any_instance_of(Kanban).to receive(:save).and_return(false)
+    #    put :update, {:id => kanban.to_param, :kanban => { "gitlab_project_id" => "invalid value" }}, valid_session
+    #    expect(response).to render_template("edit")
+    #  end
+    #end
+  end
 
   describe "DELETE destroy" do
     it "destroys the requested kanban" do

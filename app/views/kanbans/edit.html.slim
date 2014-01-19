@@ -1,5 +1,12 @@
 h1 Editing kanban
 
+- if @kanban.errors.any?
+  #error_explanation.alert.alert-warning
+    h4 = "#{pluralize(@kanban.errors.count, "error")} prohibited this kanban from being saved:"
+    ul
+      - @kanban.errors.full_messages.each do |message|
+        li = message
+
 = form_tag kanban_path, id: "update_kanban", method: :put do
   table.table.table-hover.table-condensed
     thead
@@ -15,20 +22,22 @@ h1 Editing kanban
             span.glyphicon.glyphicon-question-sign
         th
     tbody
-      = content_tag_for(:tr, @kanban.labels, "edit") do |label|
-        td
-          = text_field_tag "labels[][name]", label.name, id: nil
-        td
-          = text_field_tag "labels[][gitlab_label]", label.gitlab_label, id: nil
-        td.col-md-1
-          label.btn.btn-success
-            = radio_button_tag "labels[][is_backlog_issue]", label.id, label.is_backlog_issue?, id: nil
-        td.col-md-1
-          label.btn.btn-warning
-            = radio_button_tag "labels[][is_close_issue]", label.id, label.is_close_issue?, id: nil
-        td
-          = button_tag :submit_button, class: "btn btn-danger", id: nil do
-            span.glyphicon.glyphicon-trash
+      - @labels.each do |label|
+        tr.edit_label
+          = hidden_field_tag "labels[][id]", label[:id]
+          td
+            = text_field_tag "labels[][name]", label[:name], id: nil
+          td
+            = text_field_tag "labels[][gitlab_label]", label[:gitlab_label], id: nil
+          td.col-md-1
+            label.btn.btn-success
+              = radio_button_tag "labels[][is_backlog_issue]", true, label[:is_backlog_issue], id: nil
+          td.col-md-1
+            label.btn.btn-warning
+              = radio_button_tag "labels[][is_close_issue]", true, label[:is_close_issue], id: nil
+          td
+            = button_tag :submit_button, class: "btn btn-danger", id: nil do
+              span.glyphicon.glyphicon-trash
 
   = button_tag :submit_button, class: "btn btn-primary" do
     span.glyphicon.glyphicon-floppy-save

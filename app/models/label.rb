@@ -14,7 +14,7 @@
 #
 # Indexes
 #
-#  index_labels_on_kanban_id_and_disp_order  (kanban_id,disp_order) UNIQUE
+#  index_labels_on_kanban_id_and_disp_order  (kanban_id,disp_order)
 #
 
 class Label < ActiveRecord::Base
@@ -26,8 +26,11 @@ class Label < ActiveRecord::Base
   ]
 
   scope :backlog, -> { where(is_backlog_issue: true , is_close_issue: false) }
-  scope :done   , -> { where(is_backlog_issue: false, is_close_issue: true) }
+  scope :done   , -> { where(is_backlog_issue: false, is_close_issue: true)  }
   scope :other  , -> { where(is_backlog_issue: false, is_close_issue: false) }
+
+  validates_presence_of :name
+  validates_presence_of :gitlab_label, if: -> label{ !label.is_backlog_issue? && !label.is_close_issue? }
 
   before_save :normalize_gitlab_label
 

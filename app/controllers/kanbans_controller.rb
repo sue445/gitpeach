@@ -1,5 +1,5 @@
 class KanbansController < ApplicationController
-  before_action :set_kanban, only: [:show, :destroy, :edit]
+  before_action :set_kanban, only: [:show, :destroy, :edit, :update]
 
   unless Rails.env.test?
     before_action :authenticate_user
@@ -44,6 +44,7 @@ class KanbansController < ApplicationController
   # TODO remove after
   # GET /kanbans/1/edit
   def edit
+    @labels = @kanban.labels.map{|label| label.attributes.with_indifferent_access }
   end
 
   # POST /kanbans
@@ -62,20 +63,35 @@ class KanbansController < ApplicationController
     end
   end
 
-  # TODO remove after
   # PATCH/PUT /kanbans/1
   # PATCH/PUT /kanbans/1.json
-  #def update
-  #  respond_to do |format|
-  #    if @kanban.update(kanban_params)
-  #      format.html { redirect_to @kanban, notice: 'Kanban was successfully updated.' }
-  #      format.json { head :no_content }
-  #    else
-  #      format.html { render action: 'edit' }
-  #      format.json { render json: @kanban.errors, status: :unprocessable_entity }
-  #    end
-  #  end
-  #end
+  def update
+    is_all_success = true
+
+    Label.transaction do
+      params[:labels].each_with_index do |label_params, index|
+        label_params[:disp_order] = index
+        if label_params[:id]
+          label = @kanban.labels.find(label_params[:id])
+          is_all_success &= label.update(label_params.reject{|k,v| k == :id })
+        else
+          label = @kanban.labels.build(label_params)
+          is_all_success &= label.save
+        end
+
+        label.errors.each do |attribute, error|
+          @kanban.errors[attribute] = error
+        end
+      end
+    end
+
+    if is_all_success
+      redirect_to edit_kanban_path(@kanban), notice: 'Kanban was successfully updated.'
+    else
+      @labels = params[:labels]
+      render action: 'edit'
+    end
+  end
 
   # DELETE /kanbans/1
   # DELETE /kanbans/1.json
