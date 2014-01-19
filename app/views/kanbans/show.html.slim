@@ -30,13 +30,14 @@ h1
             .panel-body
               = link_to @user_kanban.issue_url(issue) do
                 = issue.title
-            .panel-footer
+            .panel-footer.issue-panel__footer
               .issue-panel__labels
                 - issue.labels.each do |label|
                   span.label.label-success
                     = label
-              = link_to "#{@user_kanban.issue_url(issue)}#notes" do
-                span.glyphicon.glyphicon-comment.issue-panel__note
+              .issue-panel__note
+                = link_to "#{@user_kanban.issue_url(issue)}#notes" do
+                  span.glyphicon.glyphicon-comment
 
 = hidden_field_tag :kanban_name, @kanban.name
 

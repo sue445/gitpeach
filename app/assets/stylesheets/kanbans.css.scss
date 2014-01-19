@@ -7,7 +7,6 @@
 }
 
 .issue-panel {
-  position: relative;
   z-index: 50;
 }
 
@@ -16,19 +15,23 @@
 }
 
 .issue-panel .issue-panel__header{
+  position: relative;
   cursor: move;
 }
 
-.issue-panel .issue-panel__assignee{
+.issue-panel .issue-panel__header .issue-panel__assignee{
   position: absolute;
   top:      0px;
   right:    0px;
 }
 
-.issue-panel .issue-panel__note{
-  float: right;
+.issue-panel .issue-panel__footer{
+  position: relative;
 }
 
-.issue-panel .issue-panel__labels span.label{
-  margin: 1px;
+.issue-panel .issue-panel__footer .issue-panel__note{
+  position: absolute;
+  top:      10px;
+  right:    10px;
 }
+

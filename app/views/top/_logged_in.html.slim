@@ -1,17 +1,25 @@
-h1 Projects
+h1 Kanban
 
-table.table
-  tbody
-    - @kanban_projects.each do |project|
-      tr
-        td
-          = link_to project.path_with_namespace, project.web_url
-        td
-          = link_to kanban_path(project.path_with_namespace), class: "btn btn-default" do
-            | Show Kanban
-          = link_to project.path_with_namespace, data: {:confirm => 'Are you sure?'}, class: "btn btn-danger", method: :delete do
-            span.glyphicon.glyphicon-trash
-            | Destroy Kanban
+- if @kanban_projects.empty?
+  .alert.alert-info
+    | not created any Kanban
+
+- else
+  table.table
+    tbody
+      - @kanban_projects.each do |project|
+        tr
+          td
+            = link_to project.path_with_namespace, project.web_url
+          td
+            = link_to kanban_path(project.path_with_namespace), class: "btn btn-default" do
+              span.glyphicon.glyphicon-tasks
+              | Show Kanban
+            = link_to project.path_with_namespace, data: {:confirm => 'Are you sure?'}, class: "btn btn-danger", method: :delete do
+              span.glyphicon.glyphicon-trash
+              | Destroy Kanban
+
+h1 Projects
 
 table.table
   tbody
