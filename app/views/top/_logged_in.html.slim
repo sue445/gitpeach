@@ -14,10 +14,13 @@ h1 Kanban
           td
             = link_to kanban_path(project.path_with_namespace), class: "btn btn-default" do
               span.glyphicon.glyphicon-tasks
-              | Show Kanban
+              | Show
+            = link_to edit_kanban_path(project.path_with_namespace), class: "btn btn-default" do
+              span.glyphicon.glyphicon-wrench
+              | Edit
             = link_to project.path_with_namespace, data: {:confirm => 'Are you sure?'}, class: "btn btn-danger", method: :delete do
               span.glyphicon.glyphicon-trash
-              | Destroy Kanban
+              | Destroy
 
 h1 Projects
 

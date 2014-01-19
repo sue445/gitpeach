@@ -1,5 +1,5 @@
 class KanbansController < ApplicationController
-  before_action :set_kanban, only: [:show, :destroy]
+  before_action :set_kanban, only: [:show, :destroy, :edit]
 
   unless Rails.env.test?
     before_action :authenticate_user
@@ -43,8 +43,8 @@ class KanbansController < ApplicationController
 
   # TODO remove after
   # GET /kanbans/1/edit
-  #def edit
-  #end
+  def edit
+  end
 
   # POST /kanbans
   # POST /kanbans.json

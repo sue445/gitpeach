@@ -16,3 +16,8 @@
  *
  *= require_tree .
  */
+
+input:disabled{
+    opacity: 1;
+    background: #d3d3d3;
+}​

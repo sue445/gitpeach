@@ -1,8 +1,40 @@
 h1 Editing kanban
 
-== render 'form'
+= form_tag kanban_path, id: "update_kanban", method: :put do
+  table.table.table-hover.table-condensed
+    thead
+      tr
+        th.col-md-2 Name
+        th.col-md-2 Gitlab label
+        th.col-md-4 colspan=2
+          | Backlog
+          = link_to "#", "data-toggle"=>"tooltip", title: "Check to display all open issues in this column", class: "header-tooltip" do
+            span.glyphicon.glyphicon-question-sign
+          | &nbsp; Close
+          = link_to "#", "data-toggle"=>"tooltip", title: "Check to close an issue on Gitlab when a card is dragged into this column", class: "header-tooltip" do
+            span.glyphicon.glyphicon-question-sign
+        th
+    tbody
+      = content_tag_for(:tr, @kanban.labels, "edit") do |label|
+        td
+          = text_field_tag "labels[][name]", label.name, id: nil
+        td
+          = text_field_tag "labels[][gitlab_label]", label.gitlab_label, id: nil
+        td.col-md-1
+          label.btn.btn-success
+            = radio_button_tag "labels[][is_backlog_issue]", label.id, label.is_backlog_issue?, id: nil
+        td.col-md-1
+          label.btn.btn-warning
+            = radio_button_tag "labels[][is_close_issue]", label.id, label.is_close_issue?, id: nil
+        td
+          = button_tag :submit_button, class: "btn btn-danger", id: nil do
+            span.glyphicon.glyphicon-trash
 
-= link_to 'Show', @kanban
-'|
-= link_to 'Back', kanbans_path
+  = button_tag :submit_button, class: "btn btn-primary" do
+    span.glyphicon.glyphicon-floppy-save
+    | Save
 
+  = link_to root_path, class: "btn btn-default" do
+    | Back
+
+= javascript_include_tag "kanbans_edit"
