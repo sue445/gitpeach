@@ -1,6 +1,7 @@
 h1 Gitpeach
 
 = form_tag login_path, class: "form-horizontal" do
+  = hidden_field_tag :back_to, params[:back_to]
   .form-group
     label for="login" class="col-sm-2 control-label"
       | Login

@@ -9,14 +9,16 @@ class SessionsController < ApplicationController
     user.save!
 
     session[:user_id] = user.id
-    redirect_to root_url, notice: "Signed in!"
+
+    back_to_path = params[:back_to] ? params[:back_to] : root_path
+    redirect_to back_to_path, notice: "Signed in!"
 
   rescue Gitlab::Error::Unauthorized => e
-    redirect_to root_url, alert: "Unauthorized"
+    redirect_to root_path(back_to: params[:back_to]), alert: "Unauthorized"
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_url, notice: "Signed Out!"
+    redirect_to root_path, notice: "Signed Out!"
   end
 end

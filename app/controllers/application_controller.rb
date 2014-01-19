@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   # if not logged in, redirect to top
   def authenticate_user
-    redirect_to root_path if not_logged_in?
+    redirect_to root_path(back_to: request.original_fullpath) if not_logged_in?
   end
 
   def current_user
