@@ -16,3 +16,6 @@ $(document).ready ->
 
   $("tr.edit_label input:radio").change ->
     refresh_table()
+
+  $("tr.edit_label button.delete_label").click ->
+    $(this).parents("tr.edit_label").remove()

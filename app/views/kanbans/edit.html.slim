@@ -36,7 +36,7 @@ h1 Editing kanban
             label.btn.btn-warning
               = radio_button_tag "labels[][is_close_issue]", true, label[:is_close_issue], id: nil
           td
-            = button_tag :submit_button, class: "btn btn-danger", id: nil do
+            = button_tag :delete_label, type: "button", class: "btn btn-danger delete_label", id: nil do
               span.glyphicon.glyphicon-trash
 
   = button_tag :submit_button, class: "btn btn-primary" do

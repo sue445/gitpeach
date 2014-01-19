@@ -69,6 +69,11 @@ class KanbansController < ApplicationController
     is_all_success = true
 
     Label.transaction do
+      param_label_ids = params[:labels].inject([]){|array, label_params| array << label_params[:id]; array }.compact.map(&:to_i)
+      @kanban.labels.each do |label|
+        label.destroy unless param_label_ids.include?(label.id)
+      end
+
       params[:labels].each_with_index do |label_params, index|
         label_params[:disp_order] = index
         if label_params[:id]

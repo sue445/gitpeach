@@ -141,13 +141,8 @@ describe KanbansController do
         labels[1][:gitlab_label] = "ready5"
       end
 
-      it "should update label#name" do
-        expect{ subject }.to change{ Label.find(backlog.id).name }.from("Backlog").to("TODO")
-      end
-
-      it "should update label#gitlab_label" do
-        expect{ subject }.to change{ Label.find(ready.id).gitlab_label }.from("ready").to("ready5")
-      end
+      it{ expect{ subject }.to change{ Label.find(backlog.id).name       }.from("Backlog").to("TODO") }
+      it{ expect{ subject }.to change{ Label.find(ready.id).gitlab_label }.from("ready").to("ready5") }
     end
 
     context "When add new label" do
@@ -159,13 +154,17 @@ describe KanbansController do
         {name: "Pending", gitlab_label: "pending", is_backlog_issue: false, is_close_issue: false}
       end
 
-      it "should create new label" do
-        expect{ subject }.to change(Label, :count).by(1)
+      it{ expect{ subject }.to change(Label, :count).by(1) }
+      it{ expect{ subject }.to change{ Label.find(done.id).disp_order }.from(3).to(4) }
+    end
+
+    context "When delete label" do
+      before do
+        labels.delete_at(2)
       end
 
-      it "should update label#disp_order" do
-        expect{ subject }.to change{ Label.find(done.id).disp_order }.from(3).to(4)
-      end
+      it{ expect{ subject }.to change(Label, :count).by(-1) }
+      it{ expect{ subject }.to change{ Label.where(id: in_progress.id).exists? }.from(true).to(false) }
     end
 
     context "When swap labels" do
@@ -173,13 +172,8 @@ describe KanbansController do
         labels[0], labels[1] = labels[1], labels[0]
       end
 
-      it "should update label#disp_order" do
-        expect{ subject }.to change{ Label.find(backlog.id).disp_order }.from(0).to(1)
-      end
-
-      it "should update label#disp_order" do
-        expect{ subject }.to change{ Label.find(ready.id).disp_order }.from(1).to(0)
-      end
+      it{ expect{ subject }.to change{ Label.find(backlog.id).disp_order }.from(0).to(1) }
+      it{ expect{ subject }.to change{ Label.find(ready.id).disp_order   }.from(1).to(0) }
     end
 
 
