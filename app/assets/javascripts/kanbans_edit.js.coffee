@@ -31,6 +31,9 @@ $(document).ready ->
     $("input[name='labels[][is_close_issue]']").each ->
       $(this).removeAttr("checked") unless that == this
 
+  $("#add_label").click ->
+    $("ul#hidden_list li").clone().prependTo($("#update_kanban ul"))
+
   $("#update_kanban ul").sortable
     connectWith: "#update_kanban ul"
     cursor:      "move"

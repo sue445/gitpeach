@@ -4,6 +4,9 @@ h1
   = link_to sync_kanban_path, class: "btn btn-default btn-xs help-tooltip", "data-toggle"=>"tooltip", title: "Sync with Gitlab (if changed repository name, click this)" do
     span.glyphicon.glyphicon-refresh
 
+  = button_tag :add_label, type: "button", class: "btn btn-default btn-xs", id: :add_label do
+    span.glyphicon.glyphicon-plus
+
 - if @kanban.errors.any?
   #error_explanation.alert.alert-warning
     h4 = "#{pluralize(@kanban.errors.count, "error")} prohibited this kanban from being saved:"
@@ -45,3 +48,27 @@ h1
 
 
 = javascript_include_tag "kanbans_edit"
+
+
+/ if append line, copied DOM
+ul#hidden_list
+  li.edit_label.list-group-item
+    i.glyphicon.glyphicon-align-justify.drag-column
+    = hidden_field_tag "labels[][id]", nil
+    = text_field_tag "labels[][name]", nil, id: nil, placeholder: "name"
+    = text_field_tag "labels[][gitlab_label]", nil, id: nil, placeholder: "gitlab label"
+
+    label.btn.btn-success
+      = radio_button_tag "labels[][is_backlog_issue]", true, nil, id: nil
+      | Backlog Issue
+    = link_to "#", "data-toggle"=>"tooltip", title: "Check to display all open issues in this column", class: "help-tooltip" do
+      span.glyphicon.glyphicon-question-sign
+
+    label.btn.btn-warning
+      = radio_button_tag "labels[][is_close_issue]", true, nil, id: nil
+      | Close Issue
+    = link_to "#", "data-toggle"=>"tooltip", title: "Check to close an issue on Gitlab when a card is dragged into this column", class: "help-tooltip" do
+      span.glyphicon.glyphicon-question-sign
+
+    = button_tag :delete_label, type: "button", class: "btn btn-danger delete_label", id: nil do
+      span.glyphicon.glyphicon-trash

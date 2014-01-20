@@ -80,12 +80,12 @@ class KanbansController < ApplicationController
         label_params[:is_close_issue]   = false unless label_params.has_key?(:is_close_issue)
 
         label_params[:disp_order] = index
-        if label_params[:id]
-          label = @kanban.labels.find(label_params[:id])
-          is_all_success &= label.update(label_params.reject{|k,v| k == :id })
-        else
+        if label_params[:id].blank?
           label = @kanban.labels.build(label_params)
           is_all_success &= label.save
+        else
+          label = @kanban.labels.find(label_params[:id])
+          is_all_success &= label.update(label_params.reject{|k,v| k == :id })
         end
 
         label.errors.each do |attribute, error|
