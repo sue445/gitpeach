@@ -12,36 +12,28 @@ h1
         li = message
 
 = form_tag kanban_path, id: "update_kanban", method: :put do
-  table.table.table-hover.table-condensed
-    thead
-      tr
-        th.col-md-2 Name
-        th.col-md-2 Gitlab label
-        th.col-md-4 colspan=2
-          | Backlog
-          = link_to "#", "data-toggle"=>"tooltip", title: "Check to display all open issues in this column", class: "help-tooltip" do
-            span.glyphicon.glyphicon-question-sign
-          | &nbsp; Close
-          = link_to "#", "data-toggle"=>"tooltip", title: "Check to close an issue on Gitlab when a card is dragged into this column", class: "help-tooltip" do
-            span.glyphicon.glyphicon-question-sign
-        th
-    tbody
-      - @labels.each do |label|
-        tr.edit_label
-          = hidden_field_tag "labels[][id]", label[:id]
-          td
-            = text_field_tag "labels[][name]", label[:name], id: nil
-          td
-            = text_field_tag "labels[][gitlab_label]", label[:gitlab_label], id: nil
-          td.col-md-1
-            label.btn.btn-success
-              = radio_button_tag "labels[][is_backlog_issue]", true, label[:is_backlog_issue], id: nil
-          td.col-md-1
-            label.btn.btn-warning
-              = radio_button_tag "labels[][is_close_issue]", true, label[:is_close_issue], id: nil
-          td
-            = button_tag :delete_label, type: "button", class: "btn btn-danger delete_label", id: nil do
-              span.glyphicon.glyphicon-trash
+  ul.list-group
+    - @labels.each do |label|
+      li.edit_label.list-group-item
+        i.glyphicon.glyphicon-align-justify.drag-column
+        = hidden_field_tag "labels[][id]", label[:id]
+        = text_field_tag "labels[][name]", label[:name], id: nil, placeholder: "name"
+        = text_field_tag "labels[][gitlab_label]", label[:gitlab_label], id: nil, placeholder: "gitlab label"
+
+        label.btn.btn-success
+          = radio_button_tag "labels[][is_backlog_issue]", true, label[:is_backlog_issue], id: nil
+          | Backlog Issue
+        = link_to "#", "data-toggle"=>"tooltip", title: "Check to display all open issues in this column", class: "help-tooltip" do
+          span.glyphicon.glyphicon-question-sign
+
+        label.btn.btn-warning
+          = radio_button_tag "labels[][is_close_issue]", true, label[:is_close_issue], id: nil
+          | Close Issue
+        = link_to "#", "data-toggle"=>"tooltip", title: "Check to close an issue on Gitlab when a card is dragged into this column", class: "help-tooltip" do
+          span.glyphicon.glyphicon-question-sign
+
+        = button_tag :delete_label, type: "button", class: "btn btn-danger delete_label", id: nil do
+          span.glyphicon.glyphicon-trash
 
   div
     = button_tag :submit_button, class: "btn btn-primary" do
