@@ -19,3 +19,14 @@ $(document).ready ->
 
   $("tr.edit_label button.delete_label").click ->
     $(this).parents("tr.edit_label").remove()
+
+  # clear old radio button
+  $("input[name='labels[][is_backlog_issue]']").click ->
+    that = this
+    $("input[name='labels[][is_backlog_issue]']").each ->
+      $(this).removeAttr("checked") unless that == this
+
+  $("input[name='labels[][is_close_issue]']").click ->
+    that = this
+    $("input[name='labels[][is_close_issue]']").each ->
+      $(this).removeAttr("checked") unless that == this

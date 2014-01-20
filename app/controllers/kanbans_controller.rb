@@ -75,6 +75,10 @@ class KanbansController < ApplicationController
       end
 
       params[:labels].each_with_index do |label_params, index|
+        # for checked -> unchecked
+        label_params[:is_backlog_issue] = false unless label_params.has_key?(:is_backlog_issue)
+        label_params[:is_close_issue]   = false unless label_params.has_key?(:is_close_issue)
+
         label_params[:disp_order] = index
         if label_params[:id]
           label = @kanban.labels.find(label_params[:id])

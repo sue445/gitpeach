@@ -43,13 +43,13 @@ h1
             = button_tag :delete_label, type: "button", class: "btn btn-danger delete_label", id: nil do
               span.glyphicon.glyphicon-trash
 
-div
-  = button_tag :submit_button, class: "btn btn-primary" do
-    span.glyphicon.glyphicon-floppy-save
-    | Save
+  div
+    = button_tag :submit_button, class: "btn btn-primary" do
+      span.glyphicon.glyphicon-floppy-save
+      | Save
 
-  = link_to kanban_path, class: "btn btn-default" do
-    | Back
+    = link_to kanban_path, class: "btn btn-default" do
+      | Back
 
 
 = javascript_include_tag "kanbans_edit"
