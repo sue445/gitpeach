@@ -11,7 +11,7 @@ refresh_table = ->
       $(this).find("input[name='labels[][gitlab_label]']").removeAttr('disabled')
 
 $(document).ready ->
-  $(".header-tooltip").tooltip()
+  $(".help-tooltip").tooltip()
   refresh_table()
 
   $("tr.edit_label input:radio").change ->

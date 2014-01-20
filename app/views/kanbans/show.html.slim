@@ -3,6 +3,8 @@
 
 h1
   = link_to @kanban.name, @user_kanban.project.web_url
+  = link_to edit_kanban_path, class: "btn btn-default btn-xs" do
+    span.glyphicon.glyphicon-wrench
 
 .row
   - @label_groups.each do |label_group|

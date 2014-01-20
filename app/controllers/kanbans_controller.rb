@@ -1,9 +1,9 @@
 class KanbansController < ApplicationController
-  before_action :set_kanban, only: [:show, :destroy, :edit, :update]
+  before_action :set_kanban, only: [:show, :destroy, :edit, :update, :sync]
 
   unless Rails.env.test?
     before_action :authenticate_user
-    before_action :set_user_kanban, only: [:show]
+    before_action :set_user_kanban, only: [:show, :sync]
   end
 
   # TODO remove after
@@ -105,6 +105,18 @@ class KanbansController < ApplicationController
     respond_to do |format|
       format.html { redirect_to root_url }
       format.json { head :no_content }
+    end
+  end
+
+  def sync
+    @kanban.gitlab_project_id = @user_kanban.project.id
+    @kanban.name              = @user_kanban.project.path_with_namespace
+    @kanban.slug              = nil
+
+    if @kanban.save
+      redirect_to edit_kanban_path(@kanban), notice: 'Kanban was synchronized with Gitlab.'
+    else
+      redirect_to edit_kanban_path(@kanban), error: 'Failed synchronized with Gitlab.'
     end
   end
 

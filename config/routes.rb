@@ -10,6 +10,8 @@ Gitpeach::Application.routes.draw do
 
   resources :kanbans, constraints: { id: /[a-zA-Z.0-9_\-]+\/[a-zA-Z.0-9_\-]+/ }, only: [:show, :create, :destroy, :edit, :update], path: "/" do
     member do
+      get :sync
+
       # for API using (.json is contained to id)
       get :labels, to: "kanbans#show"
     end

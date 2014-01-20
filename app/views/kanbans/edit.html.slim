@@ -1,4 +1,8 @@
-h1 Editing kanban
+h1
+  | Editing kanban
+
+  = link_to sync_kanban_path, class: "btn btn-default btn-xs help-tooltip", "data-toggle"=>"tooltip", title: "Sync with Gitlab (if changed repository name, click this)" do
+    span.glyphicon.glyphicon-refresh
 
 - if @kanban.errors.any?
   #error_explanation.alert.alert-warning
@@ -15,10 +19,10 @@ h1 Editing kanban
         th.col-md-2 Gitlab label
         th.col-md-4 colspan=2
           | Backlog
-          = link_to "#", "data-toggle"=>"tooltip", title: "Check to display all open issues in this column", class: "header-tooltip" do
+          = link_to "#", "data-toggle"=>"tooltip", title: "Check to display all open issues in this column", class: "help-tooltip" do
             span.glyphicon.glyphicon-question-sign
           | &nbsp; Close
-          = link_to "#", "data-toggle"=>"tooltip", title: "Check to close an issue on Gitlab when a card is dragged into this column", class: "header-tooltip" do
+          = link_to "#", "data-toggle"=>"tooltip", title: "Check to close an issue on Gitlab when a card is dragged into this column", class: "help-tooltip" do
             span.glyphicon.glyphicon-question-sign
         th
     tbody
@@ -39,11 +43,13 @@ h1 Editing kanban
             = button_tag :delete_label, type: "button", class: "btn btn-danger delete_label", id: nil do
               span.glyphicon.glyphicon-trash
 
+div
   = button_tag :submit_button, class: "btn btn-primary" do
     span.glyphicon.glyphicon-floppy-save
     | Save
 
-  = link_to root_path, class: "btn btn-default" do
+  = link_to kanban_path, class: "btn btn-default" do
     | Back
+
 
 = javascript_include_tag "kanbans_edit"
