@@ -1,6 +1,10 @@
 // Place all the styles related to the kanbans controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.label-area {
+  float: left;
+}
+
 .label-column {
   min-height: 800px;
   z-index: 10;

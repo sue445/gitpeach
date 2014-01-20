@@ -6,11 +6,13 @@ h1
   = link_to edit_kanban_path, class: "btn btn-default btn-xs" do
     span.glyphicon.glyphicon-wrench
 
+= hidden_field_tag :label_groups_count, @label_groups.count
+
 .row
   - @label_groups.each do |label_group|
     - label  = label_group[:label]
     - issues = label_group[:issues]
-    .col-md-3
+    .label-area
       h3
         - if label.is_backlog_issue?
           span.glyphicon.glyphicon-tasks

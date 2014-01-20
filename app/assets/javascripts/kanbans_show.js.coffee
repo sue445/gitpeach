@@ -17,6 +17,9 @@ update_issue_labels = (issue) ->
 $(document).ready ->
   issue_id = null
 
+  width_rate = 100 / $("#label_groups_count").val()
+  $(".label-area").css("width", "#{width_rate}%")
+
   $(".issue-panel").draggable(
     scope:  "label-column-scope"
     revert: "invalid"
