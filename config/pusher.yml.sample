@@ -1,0 +1,10 @@
+development: &development
+  app_id: your-pusher-app-id
+  key:    your-pusher-key
+  secret: your-pusher-secret
+
+test:
+  <<: *development
+
+production:
+  <<: *development

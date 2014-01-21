@@ -81,3 +81,4 @@ pickle-email-*.html
 /db/schema.rb
 
 config/gitlab.yml
+pusher.yml
