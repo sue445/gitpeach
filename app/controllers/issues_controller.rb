@@ -26,6 +26,10 @@ class IssuesController < ApplicationController
 
     update_gitlab_issue(@labels, @state)
 
+    unless Rails.env.test?
+      Pusher.trigger("kanban_#{@kanban.id}", :issue_update_event, {issues: @user_kanban.issues}, {socket_id: params[:socket_id]})
+    end
+
     render json: updated_issue, status: 200
   end
 

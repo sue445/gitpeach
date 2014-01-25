@@ -56,3 +56,14 @@ $(document).ready ->
       )
       null
   )
+
+  pusher  = new Pusher($("#pusher_key").val())
+  channel = pusher.subscribe($("#channel").val())
+  channel.bind(
+    "issue_update_event",
+    (data) ->
+      console.log(data)
+#      location.reload()
+  )
+  null
+

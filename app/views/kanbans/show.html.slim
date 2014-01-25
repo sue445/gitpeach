@@ -44,5 +44,8 @@ h1
                   span.glyphicon.glyphicon-comment
 
 = hidden_field_tag :kanban_name, @kanban.name
+= hidden_field_tag :pusher_key , Pusher.key
+= hidden_field_tag :channel    , "kanban_#{@kanban.id}"
 
+= javascript_include_tag "http://js.pusher.com/2.1/pusher.min.js"
 = javascript_include_tag "kanbans_show"
