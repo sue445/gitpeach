@@ -25,7 +25,7 @@ class KanbansController < ApplicationController
       issues = issues_group_by_label[label.id] || []
       if label == done_label
         # reject old closed tasks
-        issues = issues.reject{|issue| issue.created_at < 1.week.ago }
+        issues = issues.reject{|issue| issue.updated_at < 1.week.ago }
       end
 
       @label_groups << {
