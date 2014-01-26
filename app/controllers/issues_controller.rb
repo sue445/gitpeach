@@ -4,7 +4,7 @@ class IssuesController < ApplicationController
   unless Rails.env.test?
     before_action :authenticate_user
     before_action :set_user_kanban
-    before_action :set_issue, only: [:update]
+    before_action :set_issue
 
     rescue_from StandardError do |exception|
       Rails.logger.error exception.full_backtrace
@@ -15,6 +15,10 @@ class IssuesController < ApplicationController
       }
       render json: response, status: 500
     end
+  end
+
+  def show
+    render partial: "shared/issue_panel", locals: {issue: @issue}
   end
 
   def update
