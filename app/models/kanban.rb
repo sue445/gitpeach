@@ -33,6 +33,27 @@ class Kanban < ActiveRecord::Base
     issues.group_by{|issue| issue_label_id(issue) }
   end
 
+  def label_groups(issues)
+    issues_group_by_label = self.issues_group_by_label(issues)
+    done_label = self.labels.done.first
+
+    label_groups = []
+    self.labels.each do |label|
+      issues = issues_group_by_label[label.id] || []
+      if label == done_label
+        # reject old closed tasks
+        issues = issues.reject{|issue| issue.updated_at < 1.week.ago }
+      end
+
+      label_groups << {
+          label:  label,
+          issues: issues
+      }
+    end
+
+    label_groups
+  end
+
   # @return [Integer] label_id
   def issue_label_id(issue)
     if issue.state == "closed"

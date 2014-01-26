@@ -31,4 +31,10 @@ h1
 = hidden_field_tag :channel    , "kanban_#{@kanban.id}"
 
 = javascript_include_tag "http://js.pusher.com/2.1/pusher.min.js"
+
+- unless Rails.env.production?
+  coffee:
+    window.Pusher.log = (message) ->
+      window.console.log(message) if window.console && window.console.log
+
 = javascript_include_tag "kanbans_show"

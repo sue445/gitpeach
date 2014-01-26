@@ -16,23 +16,7 @@ class KanbansController < ApplicationController
   # GET /kanbans/1
   # GET /kanbans/1.json
   def show
-    issues_group_by_label = @kanban.issues_group_by_label(project_issues)
-
-    done_label = @kanban.labels.done.first
-
-    @label_groups = []
-    @kanban.labels.each do |label|
-      issues = issues_group_by_label[label.id] || []
-      if label == done_label
-        # reject old closed tasks
-        issues = issues.reject{|issue| issue.updated_at < 1.week.ago }
-      end
-
-      @label_groups << {
-          label:  label,
-          issues: issues
-      }
-    end
+    @label_groups = @kanban.label_groups(project_issues)
   end
 
   # TODO remove after
