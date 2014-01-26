@@ -13,10 +13,10 @@ Gitpeach::Application.routes.draw do
       get :sync
 
       # for API using (.json is contained to id)
-      get :labels, to: "kanbans#show"
+      get :label_issues, to: "kanbans#show"
     end
 
-    resources :issues, constraints: {id: /\d+/}, only: [:update] do
+    resources :issues, constraints: {id: /\d+/}, only: [:show, :update] do
 
     end
   end

@@ -1,6 +1,6 @@
 show_label_count = ->
   $.ajax(
-    url: "/" + $("#kanban_name").val() + "/labels.json"
+    url: "/" + $("#kanban_name").val() + "/label_issues.json"
     success: (data, data_type) ->
       for i, label_group of data.label_groups
         label = label_group.label
