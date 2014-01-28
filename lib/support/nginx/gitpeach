@@ -1,0 +1,56 @@
+# statements for each of your virtual hosts
+upstream gitpeach {
+   server 127.0.0.1:8080;
+}
+
+server {
+    listen   80 default;
+
+    #listen   80 ;
+    #listen   443 default_server ssl;
+    #listen   443 default ssl;
+    # TODO edit here
+    server_name  peach.example.com;
+
+    #ssl on;
+    #ssl_certificate /etc/nginx/conf.d/cert.pem;
+    #ssl_certificate_key /etc/nginx/conf.d/cert.key;
+
+    access_log  /var/log/nginx/gitpeach_access.log combined;
+    error_log   /var/log/nginx/gitpeach_error.log warn;
+
+    location / {
+        root   /var/www/gitpeach/public;
+
+        if (-f $request_filename) {
+            access_log off;
+            rewrite_log off;
+            expires 1h;
+            break;
+        }
+
+        proxy_set_header X-Forwarded-Proto $scheme;
+        # proxy_set_header X-Forwarded-Proto $http_x_forwarded_proto;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $host;
+        proxy_redirect off;
+        #proxy_read_timeout 8;
+        #proxy_connect_timeout 2;
+        send_timeout          300;
+        proxy_read_timeout    300;
+        proxy_connect_timeout 300;
+        proxy_buffer_size 16k;
+        proxy_buffers 32 16k;
+        proxy_busy_buffers_size 64k;
+
+        if (!-f $request_filename) {
+            proxy_pass gitpeach;
+            break;
+        }
+    }
+
+    location ~ /\.git {
+        deny  all;
+    }
+}
