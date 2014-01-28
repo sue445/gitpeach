@@ -1,5 +1,12 @@
 h1 Gitpeach
 
+- gitlab_url = Gitlab.endpoint.gsub(%r{/api/.+}, "/")
+
+.alert.alert-info
+  | Input username/password of
+  | &nbsp;
+  = link_to(gitlab_url, gitlab_url)
+
 = form_tag login_path, class: "form-horizontal" do
   = hidden_field_tag :back_to, params[:back_to]
   .form-group
