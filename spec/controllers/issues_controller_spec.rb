@@ -1,6 +1,25 @@
 require 'spec_helper'
 
 describe IssuesController do
+  describe "GET show" do
+    subject{ get :show, params }
+
+    let(:params){
+      {
+          id:        issue_id,
+          kanban_id: kanban.name,
+      }
+    }
+
+    let(:issue_id){ 1 }
+    let(:kanban)  { FactoryGirl.create(:kanban) }
+
+    it "should be success" do
+      subject
+      expect(response).to be_success
+    end
+  end
+
   describe "PUT update" do
     subject{ put :update, params }
 

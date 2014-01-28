@@ -4,7 +4,7 @@ class IssuesController < ApplicationController
   unless Rails.env.test?
     before_action :authenticate_user
     before_action :set_user_kanban
-    before_action :set_issue, only: [:update]
+    before_action :set_issue
 
     rescue_from StandardError do |exception|
       Rails.logger.error exception.full_backtrace
@@ -17,6 +17,10 @@ class IssuesController < ApplicationController
     end
   end
 
+  def show
+    render partial: "shared/issue_panel", locals: {issue: @issue}
+  end
+
   def update
     raise ArgumentError, "require to_label_id" unless params[:to_label_id]
 
@@ -25,6 +29,11 @@ class IssuesController < ApplicationController
     @state  = @kanban.gitlab_issue_state(from_label_id, params[:to_label_id])
 
     update_gitlab_issue(@labels, @state)
+
+    unless Rails.env.test?
+      label_groups = @kanban.label_groups(@user_kanban.issues)
+      Pusher.trigger("kanban_#{@kanban.id}", :issue_update_event, {label_groups: label_groups}, {socket_id: params[:socket_id]})
+    end
 
     render json: updated_issue, status: 200
   end
