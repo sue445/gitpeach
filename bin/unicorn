@@ -1,0 +1,117 @@
+#!/usr/bin/env ruby
+require File.dirname(__FILE__) + '/../config/boot'
+
+require "fileutils"
+require "optparse"
+
+RAILS_ROOT = "#{File.dirname(__FILE__)}/.." unless defined?(RAILS_ROOT)
+options = {
+    "-c" => File.join(RAILS_ROOT, 'config', 'unicorn.rb'),
+    "-E" => "development",
+    "-p" => "8080"
+}
+
+ARGV.clone.options do |opts|
+  opts.on("-d", "--daemon", "Make server run as a Daemon") { options["-D"] = nil }
+  opts.on("-e", "--env=environment", "Rails environment(default: development)") {|v| options["-E"] = v }
+  opts.on("-c", "--config=file", "use custom unicorn configuration file(default: config/unicorn.rb)") {|v| options["-c"] = v }
+  opts.on("-u", "--debugger", "Enable Debugger") {|v| options["-d"] = nil }
+  opts.on("-p", "--port=number", "Port number") {|v| options["-p"] = v}
+
+  opts.on("-h", "--help", "Show this help message.") { puts opts; exit }
+  opts.parse!
+end
+
+
+class UnicornManager
+  class << self
+    def start(options = {})
+      exec("unicorn_rails #{options.to_a.join(' ')}")
+    end
+
+    # reloading config but deployed application code cannot be loaded when preload_app == true.
+    def hup(options = {})
+      if send_signal("HUP", master_pid)
+        puts "unicorn master successfully SIGHUPed."
+      else
+        puts "cannot send SIGHUP signal to unicorn server."
+      end
+    end
+
+    # graceful_restarting with USR2+QUIT
+    def graceful(options = {})
+      if send_signal("USR2", master_pid)
+        puts "send USR2 to unicorn master successfully.."
+      else
+        puts "cannot send USR2 signal to unicorn server."
+      end
+    end
+
+    def stop(options = {})
+      if send_signal("QUIT", master_pid)
+        puts "unicorn master successfully SIGQUITed"
+      else
+        puts "cannot send SIGQUIT signal to unicorn server."
+      end
+    end
+
+    def kill(options = {})
+      if send_signal("INT", master_pid)
+        puts "unicorn master successfully SIGINTed"
+      else
+        puts "cannot send SIGINT signal to unicorn server."
+      end
+    end
+
+    def rotatelog(options = {})
+      if send_signal("USR1", master_pid)
+        puts "unicorn master successfully SIGUSR1ed"
+      else
+        puts "cannot send SIGUSR1 signal to unicorn server."
+      end
+    end
+
+    def incr(options = {})
+      if send_signal("TTIN", master_pid)
+        puts "unicorn master successfully SIGTTINed"
+      else
+        puts "cannot send SIGTTIN signal to unicorn server."
+      end
+    end
+
+    def decr(options = {})
+      if send_signal("TTOU", master_pid)
+        puts "unicorn master successfully SIGTTOUed"
+      else
+        puts "cannot send SIGTTOU signal to unicorn server."
+      end
+    end
+
+    def command(command, options)
+      self.send(command, options)
+    end
+
+    def master_pid
+      File.read(File.join(RAILS_ROOT, 'tmp', 'pids', 'unicorn.pid')).strip
+    end
+
+    def old_master_pid
+      File.read(File.join(RAILS_ROOT, 'tmp', 'pids', 'unicorn.pid.oldbin')).strip
+    end
+
+    def send_signal(signal, pid)
+      exec("kill", "-#{signal}", pid)
+    end
+  end
+end
+
+command = if ["start", "stop", "hup", "graceful", "kill", "rotatelog", "incr", "decr"].include?(ARGV.first)
+            ARGV.first
+          else
+            "start"
+          end
+
+if options["-E"] != "development"
+  options.delete("-p")
+end
+UnicornManager.command(command, options)

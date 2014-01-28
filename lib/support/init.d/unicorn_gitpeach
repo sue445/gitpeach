@@ -1,0 +1,79 @@
+#!/bin/sh
+# refs:  http://gist.github.com/237953
+set -u
+set -e
+
+APP_ROOT=/var/www/gitpeach/current
+CONF=$APP_ROOT/config/unicorn.conf
+USAGE="Usage: $0 <start|stop|restart|upgrade|rotate|force-stop> <(production=default|staging)> "
+ENVIRONMENT=production
+
+cd $APP_ROOT || exit 1
+
+if [ $# -eq 0 ]; then
+  echo >&2 $USAGE
+  exit 0
+else
+  echo "$1 .......  "
+fi
+
+ENV=$ENVIRONMENT
+if [ $# -gt 1 ] ; then
+  case $2 in
+  production)
+    ENV=production
+    ;;
+  staging)
+    ENV=staging
+    ;;
+  stress)
+    ENV=stress
+    ;;
+  development)
+    ENV=development
+    ;;
+  *)
+    ENV=$ENVIRONMENT
+  ;;
+  esac
+fi
+
+GEMFILE=$APP_ROOT/Gemfile
+SCRIPT=$APP_ROOT/bin/unicorn
+
+CMD_START="$SCRIPT start -d -e $ENV"
+CMD_STOP="$SCRIPT stop"
+CMD_KILL="$SCRIPT kill"
+CMD_RESTART="$SCRIPT graceful"
+CMD_ROTATE="$SCRIPT rotatelog"
+
+SUCCESS="$1 success."
+
+# run command
+case $1 in
+start)
+  BUNDLE_GEMFILE=$GEMFILE $CMD_START
+  echo $SUCCESS
+        ;;
+stop)
+  $CMD_STOP
+  echo $SUCCESS
+        ;;
+force-stop)
+  $CMD_KILL
+  echo $SUCCESS
+        ;;
+restart|reload)
+  $CMD_RESTART
+  echo $SUCCESS
+        ;;
+rotate)
+  $CMD_ROTATE
+  echo $SUCCESS
+        ;;
+*)
+        echo >&2 $USAGE
+        exit 1
+        ;;
+esac
+

@@ -80,6 +80,10 @@ group :test do
   gem "webmock", "~> 1.16.1"
 end
 
+group :production do
+  gem "unicorn", "~> 4.8.0"
+end
+
 # twitter-bootstrap-rails
 gem "less-rails"
 gem "libv8", "~> 3.11.8"
