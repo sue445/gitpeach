@@ -9,10 +9,10 @@ Create new app
 ```sh
 bundle install --path vendor/bundle
 cp config/database.yml{.sample,}
-vi config/database.yml
 cp config/gitlab.yml{.sample,}
-vi config/gitlab.yml
 cp config/pusher.yml{.sample,}
+vi config/database.yml
+vi config/gitlab.yml
 vi config/pusher.yml
 bundle exec rake db:create
 bundle exec rake db:migrate RAILS_ENV=development
