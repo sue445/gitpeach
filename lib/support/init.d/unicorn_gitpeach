@@ -3,7 +3,7 @@
 set -u
 set -e
 
-APP_ROOT=/var/www/gitpeach/current
+APP_ROOT=/var/www/gitpeach
 CONF=$APP_ROOT/config/unicorn.conf
 USAGE="Usage: $0 <start|stop|restart|upgrade|rotate|force-stop> <(production=default|staging)> "
 ENVIRONMENT=production

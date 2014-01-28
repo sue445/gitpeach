@@ -45,7 +45,7 @@ server {
         proxy_busy_buffers_size 64k;
 
         if (!-f $request_filename) {
-            proxy_pass gitpeach;
+            proxy_pass http://gitpeach;
             break;
         }
     }
