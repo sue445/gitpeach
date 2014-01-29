@@ -1,0 +1,10 @@
+/var/www/gitpeach/log/*.log {
+  daily
+  dateext
+  missingok
+  rotate 14
+  compress
+  notifempty
+  copytruncate
+  olddir /var/www/gitpeach/log/old
+}
