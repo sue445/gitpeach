@@ -4,6 +4,8 @@
 # documentation.
 
 APP_DIR = File.expand_path("../../", __FILE__)
+UNICORN_USER  = "www-data"
+UNICORN_GROUP = "www-data"
 
 # Use at least one worker per core if you're on a dedicated server,
 # more will usually help for _short_ waits on databases/caches.
@@ -75,5 +77,5 @@ after_fork do |server, worker|
   # if preload_app is true, then you may also want to check and  # restart any other shared sockets/descriptors such as Memcached,
   # and Redis.  TokyoCabinet file handles are safe to reuse
   # between any number of forked children (assuming your kernel correctly implements pread()/pwrite() system calls)
-  # worker.user("<%= unicorn_user %>", "<%= unicorn_group %>") if Process.euid == 0
+  worker.user(UNICORN_USER, UNICORN_GROUP) if Process.euid == 0
 end
