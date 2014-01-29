@@ -42,13 +42,13 @@ describe KanbansController do
     end
   end
 
-  #describe "GET edit" do
-  #  it "assigns the requested kanban as @kanban" do
-  #    kanban = Kanban.create! valid_attributes
-  #    get :edit, {:id => kanban.to_param}, valid_session
-  #    expect(assigns(:kanban)).to eq(kanban)
-  #  end
-  #end
+  describe "GET edit" do
+    it "assigns the requested kanban as @kanban" do
+      kanban = Kanban.create! valid_attributes
+      get :edit, {:id => kanban.to_param}, valid_session
+      expect(assigns(:kanban)).to eq(kanban)
+    end
+  end
 
   describe "POST create" do
     it "creates a new Kanban" do
