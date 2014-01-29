@@ -6,26 +6,12 @@ class KanbansController < ApplicationController
     before_action :set_user_kanban, only: [:show, :sync]
   end
 
-  # TODO remove after
-  # GET /kanbans
-  # GET /kanbans.json
-  #def index
-  #  @kanbans = Kanban.all
-  #end
-
   # GET /kanbans/1
   # GET /kanbans/1.json
   def show
     @label_groups = @kanban.label_groups(project_issues)
   end
 
-  # TODO remove after
-  # GET /kanbans/new
-  #def new
-  #  @kanban = Kanban.new
-  #end
-
-  # TODO remove after
   # GET /kanbans/1/edit
   def edit
     @labels = @kanban.labels.map{|label| label.attributes.with_indifferent_access }
