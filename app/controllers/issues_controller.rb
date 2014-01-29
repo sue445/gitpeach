@@ -17,10 +17,12 @@ class IssuesController < ApplicationController
     end
   end
 
+  # GET /:kanban_id/issues/:id
   def show
     render partial: "shared/issue_panel", locals: {issue: @issue}
   end
 
+  # PATCH/PUT /:kanban_id/issues/:id
   def update
     raise ArgumentError, "require to_label_id" unless params[:to_label_id]
 

@@ -6,19 +6,19 @@ class KanbansController < ApplicationController
     before_action :set_user_kanban, only: [:show, :sync]
   end
 
-  # GET /kanbans/1
-  # GET /kanbans/1.json
+  # GET /:id
+  # GET /:id.json
   def show
     @label_groups = @kanban.label_groups(project_issues)
   end
 
-  # GET /kanbans/1/edit
+  # GET /:id/edit
   def edit
     @labels = @kanban.labels.map{|label| label.attributes.with_indifferent_access }
   end
 
-  # POST /kanbans
-  # POST /kanbans.json
+  # POST /:id
+  # POST /:id.json
   def create
     @kanban = Kanban.new(kanban_params)
 
@@ -33,8 +33,8 @@ class KanbansController < ApplicationController
     end
   end
 
-  # PATCH/PUT /kanbans/1
-  # PATCH/PUT /kanbans/1.json
+  # PATCH/PUT /:id
+  # PATCH/PUT /:id.json
   def update
     is_all_success = true
 
@@ -72,8 +72,8 @@ class KanbansController < ApplicationController
     end
   end
 
-  # DELETE /kanbans/1
-  # DELETE /kanbans/1.json
+  # DELETE /:id
+  # DELETE /:id.json
   def destroy
     @kanban.destroy
     respond_to do |format|
@@ -82,6 +82,7 @@ class KanbansController < ApplicationController
     end
   end
 
+  # GET /:id/sync
   def sync
     @kanban.gitlab_project_id = @user_kanban.project.id
     @kanban.name              = @user_kanban.project.path_with_namespace
