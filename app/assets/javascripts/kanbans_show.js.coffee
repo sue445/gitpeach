@@ -1,20 +1,3 @@
-show_label_count = ->
-  $.ajax(
-    url: "/#{$("#kanban_name").val()}/label_issues.json"
-    dataType: "json"
-    success: (data, data_type) ->
-      for i, label_group of data.label_groups
-        label = label_group.label
-        issues = label_group.issues
-        $("#count_#{label.id}").text(issues.length)
-  )
-
-update_issue_labels = (issue) ->
-  issue_panel_labels = $("#issue_#{issue.id} .issue-panel__labels")
-  issue_panel_labels.empty()
-  for i, label of issue.labels
-    $("<span/>").addClass("label label-success").text(label).appendTo(issue_panel_labels)
-
 issue_id = null
 
 init_issue_panel = (selector) ->
@@ -46,10 +29,6 @@ init_label_column = (selector) ->
         data:
           to_label_id: to_label_id
         method: "PUT"
-        success: (response, data_type) ->
-          show_label_count()
-#          update_issue_labels(response.data)
-
         error: ->
           drag_manager.rollback()
       )
@@ -70,6 +49,7 @@ $(document).ready ->
     (data) ->
       for label_id, issue_ids of data.label_group_ids
         ((label_id, issue_ids) ->
+          $("#count_#{label_id}").text(issue_ids.length)
           for issue_id in issue_ids
             ((issue_id) ->
               $.ajax(
