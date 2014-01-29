@@ -1,5 +1,3 @@
-# -*- encoding: utf-8 -*-
-
 FactoryGirl.define do
   def rand_str
     # via. http://d.hatena.ne.jp/JunMitani/20080214

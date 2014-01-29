@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe IssuesController do
   describe "GET show" do
     subject{ get :show, params }
