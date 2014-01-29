@@ -68,18 +68,18 @@ $(document).ready ->
   channel.bind(
     "issue_update_event",
     (data) ->
-      for label_group in data.label_groups
-        ((label, issues) ->
-          for issue in issues
-            ((issue) ->
+      for label_id, issue_ids of data.label_group_ids
+        ((label_id, issue_ids) ->
+          for issue_id in issue_ids
+            ((issue_id) ->
               $.ajax(
-                url: "/#{$("#kanban_name").val()}/issues/#{issue.data.id}"
+                url: "/#{$("#kanban_name").val()}/issues/#{issue_id}"
                 dataType: "html"
                 success: (html, data_type) ->
-                  $("#issue_#{issue.data.id}").remove()
-                  $("#label_#{label.id}").append($(html))
-                  init_issue_panel("#issue_#{issue.data.id}")
+                  $("#issue_#{issue_id}").remove()
+                  $("#label_#{label_id}").append($(html))
+                  init_issue_panel("#issue_#{issue_id}")
               )
-            )(issue)
-        )(label_group.label, label_group.issues)
+            )(issue_id)
+        )(label_id, issue_ids)
   )

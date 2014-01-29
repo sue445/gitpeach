@@ -32,7 +32,14 @@ class IssuesController < ApplicationController
 
     unless Rails.env.test?
       label_groups = @kanban.label_groups(@user_kanban.issues)
-      Pusher.trigger("kanban_#{@kanban.id}", :issue_update_event, {label_groups: label_groups}, {socket_id: params[:socket_id]})
+      label_group_ids = label_groups.inject({}){|res, label_issues|
+        label_id = label_issues[:label].id
+        issues   = label_issues[:issues]
+        res[label_id] = issues.map(&:id)
+        res
+      }
+
+      Pusher.trigger("kanban_#{@kanban.id}", :issue_update_event, {label_group_ids: label_group_ids}, {socket_id: params[:socket_id]})
     end
 
     render json: updated_issue, status: 200
