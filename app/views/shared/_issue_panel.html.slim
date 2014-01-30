@@ -12,6 +12,11 @@
       - issue.labels.each do |label|
         span.label class=label_css_class(label)
           = label
+    - if issue.milestone
+      .issue-panel__milestone
+        p.text-success
+          span.glyphicon.glyphicon-calendar
+          = issue.milestone.title
     .issue-panel__note
       = link_to "#{@user_kanban.issue_url(issue)}#notes" do
         span.glyphicon.glyphicon-comment
