@@ -6,6 +6,8 @@ class IssuesController < ApplicationController
     before_action :set_user_kanban
     before_action :set_issue
 
+    after_action :notify_event, only: [:create, :update]
+
     rescue_from StandardError do |exception|
       Rails.logger.error exception.full_backtrace
       response = {
@@ -37,18 +39,6 @@ class IssuesController < ApplicationController
     @state  = @kanban.gitlab_issue_state(from_label_id, params[:to_label_id])
 
     update_gitlab_issue(@labels, @state)
-
-    unless Rails.env.test?
-      label_groups = @kanban.label_groups(@user_kanban.issues)
-      label_group_ids = label_groups.inject({}){|res, label_issues|
-        label_id = label_issues[:label].id
-        issues   = label_issues[:issues]
-        res[label_id] = issues.map(&:id)
-        res
-      }
-
-      Pusher.trigger("kanban_#{@kanban.id}", :issue_update_event, {label_group_ids: label_group_ids}, {socket_id: params[:socket_id]})
-    end
 
     render json: updated_issue, status: 200
   end
@@ -84,5 +74,17 @@ class IssuesController < ApplicationController
 
     def create_gitlab_issue(title)
       @user_kanban.create_issue(title)
+    end
+
+    def notify_event
+      label_groups = @kanban.label_groups(@user_kanban.issues)
+      label_group_ids = label_groups.inject({}){|res, label_issues|
+        label_id = label_issues[:label].id
+        issues   = label_issues[:issues]
+        res[label_id] = issues.map(&:id)
+        res
+      }
+
+      Pusher.trigger("kanban_#{@kanban.id}", :issue_update_event, {label_group_ids: label_group_ids}, {socket_id: params[:socket_id]})
     end
 end
