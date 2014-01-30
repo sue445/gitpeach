@@ -27,4 +27,8 @@ class UserKanban
     options[:state_event] = state_event if state_event
     @user.gitlab.edit_issue(@project.id, issue_id, options)
   end
+
+  def create_issue(title)
+    @user.gitlab.create_issue(@project.id, title)
+  end
 end

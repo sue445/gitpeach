@@ -1,4 +1,31 @@
 describe IssuesController do
+  let(:kanban)  { FactoryGirl.create(:kanban) }
+
+  describe "POST create" do
+    subject{ post :create, params }
+
+    let(:params){
+      {
+          kanban_id: kanban.name,
+          title: "some title",
+      }
+    }
+
+    before do
+      allow(controller).to receive(:create_gitlab_issue){}
+    end
+
+    it "should be success" do
+      subject
+      expect(response).to be_success
+    end
+
+    it "should be call create_gitlab_issue with valid params" do
+      expect(controller).to receive(:create_gitlab_issue).with(params[:title])
+      subject
+    end
+  end
+
   describe "GET show" do
     subject{ get :show, params }
 
@@ -10,7 +37,6 @@ describe IssuesController do
     }
 
     let(:issue_id){ 1 }
-    let(:kanban)  { FactoryGirl.create(:kanban) }
 
     it "should be success" do
       subject
@@ -30,7 +56,6 @@ describe IssuesController do
     }
 
     let(:issue_id){ 1 }
-    let(:kanban)  { FactoryGirl.create(:kanban) }
 
     let(:from_label){ kanban.labels.backlog.first! }
     let(:to_label)  { kanban.labels.done.first! }
