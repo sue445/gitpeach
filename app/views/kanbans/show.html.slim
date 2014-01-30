@@ -8,6 +8,13 @@ h1
 
 = hidden_field_tag :label_groups_count, @label_groups.count
 
+form.form-inline#create_issue_form role="form"
+  .form-group
+    = text_field_tag :new_issue_title, nil, class: "form-control", placeholder: "issue title", size: 50
+  buttom.btn.btn-primary type="submit"
+    span.glyphicon.glyphicon-plus
+    | New Issue
+
 .row
   - @label_groups.each do |label_group|
     - label  = label_group[:label]

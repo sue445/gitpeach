@@ -63,3 +63,16 @@ $(document).ready ->
             )(issue_id)
         )(label_id, issue_ids)
   )
+
+  $("#create_issue_form").submit ->
+    if $("#new_issue_title").val()
+      $.ajax(
+        url: "/#{$("#kanban_name").val()}/issues"
+        method: "POST"
+        dataType: "json"
+        data:
+          title: $("#new_issue_title").val()
+        success: (data, data_type) ->
+          $("#new_issue_title").val("")
+      )
+    false

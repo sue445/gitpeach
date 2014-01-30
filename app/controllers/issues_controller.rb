@@ -17,6 +17,12 @@ class IssuesController < ApplicationController
     end
   end
 
+  # POST /:kanban_id/issues
+  def create
+    created_issue = create_gitlab_issue(params[:title])
+    render json: created_issue, status: 200
+  end
+
   # GET /:kanban_id/issues/:id
   def show
     render partial: "shared/issue_panel", locals: {issue: @issue}
@@ -74,5 +80,9 @@ class IssuesController < ApplicationController
 
     def updated_issue
       @user_kanban.issue(params[:id])
+    end
+
+    def create_gitlab_issue(title)
+      @user_kanban.create_issue(title)
     end
 end

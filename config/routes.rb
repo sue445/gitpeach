@@ -13,7 +13,7 @@ Gitpeach::Application.routes.draw do
       get :sync
     end
 
-    resources :issues, constraints: {id: /\d+/}, only: [:show, :update] do
+    resources :issues, constraints: {id: /\d+/}, only: [:show, :update, :create] do
     end
   end
 
