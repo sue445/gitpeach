@@ -11,9 +11,11 @@ h1
 form.form-inline#create_issue_form role="form"
   .form-group
     = text_field_tag :new_issue_title, nil, class: "form-control", placeholder: "issue title", size: 50
-  buttom.btn.btn-primary type="submit"
+  button.btn.btn-primary#create_issue_button type="submit"
     span.glyphicon.glyphicon-plus
     | New Issue
+
+  = image_tag image_path("loading.gif"), id: "loading", style: "display: none"
 
 .row
   - @label_groups.each do |label_group|

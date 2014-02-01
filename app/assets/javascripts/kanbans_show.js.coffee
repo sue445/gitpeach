@@ -66,6 +66,8 @@ $(document).ready ->
 
   $("#create_issue_form").submit ->
     if $("#new_issue_title").val()
+      $("#loading").show()
+      $("#create_issue_button").attr("disabled", "disabled")
       $.ajax(
         url: "/#{$("#kanban_name").val()}/issues"
         method: "POST"
@@ -73,6 +75,8 @@ $(document).ready ->
         data:
           title: $("#new_issue_title").val()
         success: (data, data_type) ->
+          $("#loading").hide()
+          $("#create_issue_button").removeAttr("disabled")
           $("#new_issue_title").val("")
       )
     false
