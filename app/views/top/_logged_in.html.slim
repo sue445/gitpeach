@@ -1,16 +1,13 @@
-h1 Kanban
+- unless @user_kanban_projects.empty?
+  h1 Your Kanbans
 
-- if @kanban_projects.empty?
-  .alert.alert-info
-    | not created any Kanban
-
-- else
   table.table
     tbody
-      - @kanban_projects.each do |project|
+      - @user_kanban_projects.each do |project|
         tr
           td
-            = link_to project.path_with_namespace, project.web_url
+            = link_to kanban_path(project.path_with_namespace) do
+              = project.path_with_namespace
           td
             = link_to kanban_path(project.path_with_namespace), class: "btn btn-default" do
               span.glyphicon.glyphicon-tasks
@@ -22,18 +19,35 @@ h1 Kanban
               span.glyphicon.glyphicon-trash
               | Destroy
 
-h1 Projects
+- unless @other_kanbans.empty?
+  h1 Other Kanbans
 
-table.table
-  tbody
-    - @no_kanban_projects.each do |project|
-      tr
-        td
-          = link_to project.path_with_namespace, project.web_url
-        td
-          = form_tag kanbans_path
-            = hidden_field_tag "kanban[gitlab_project_id]", project.id
-            = hidden_field_tag "kanban[name]", project.path_with_namespace
-            = button_tag type: "submit", class: "btn btn-primary" do
-              span.glyphicon.glyphicon-file
-              | Create Kanban
+  table.table
+    tbody
+      - @other_kanbans.each do |kanban|
+        tr
+          td
+            = link_to kanban_path(kanban) do
+              = kanban.name
+          td
+            = link_to kanban_path(kanban), class: "btn btn-default" do
+              span.glyphicon.glyphicon-tasks
+              | Show
+
+
+- unless @no_kanban_projects.empty?
+  h1 Your Projects
+
+  table.table
+    tbody
+      - @no_kanban_projects.each do |project|
+        tr
+          td
+            = link_to project.path_with_namespace, project.web_url
+          td
+            = form_tag kanbans_path
+              = hidden_field_tag "kanban[gitlab_project_id]", project.id
+              = hidden_field_tag "kanban[name]", project.path_with_namespace
+              = button_tag type: "submit", class: "btn btn-primary" do
+                span.glyphicon.glyphicon-file
+                | Create Kanban
