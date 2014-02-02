@@ -8,7 +8,13 @@ Create new app
 ### Setup command
 ```sh
 bundle install --path vendor/bundle
-cp config/database.yml{.sample,}
+
+# Mysql
+cp config/database.yml{.mysql,}
+
+# PostgreSQL
+cp config/database.yml{.postgresql,}
+
 cp config/gitlab.yml{.sample,}
 cp config/pusher.yml{.sample,}
 vi config/database.yml
@@ -26,3 +32,6 @@ open http://localhost:3000/
 bundle exec rake db:migrate RAILS_ENV=test
 bundle exec rspec
 ```
+
+## Sample scripts
+see [lib/support](lib/support)
