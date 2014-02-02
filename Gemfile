@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.2'
 
 # Use mysql as the database for Active Record
-gem 'mysql2'
+gem 'mysql2', "~> 0.3.15"
 gem 'pg'
 
 # Use SCSS for stylesheets
@@ -20,11 +20,11 @@ gem 'coffee-rails', '~> 4.0.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', "~> 3.1.0"
 gem "jquery-ui-rails", "~> 4.1.1"
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder', '~> 2.0.2'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -43,7 +43,7 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem "slim-rails"
+gem "slim-rails", "~> 2.1.0"
 
 # dev tool
 group :development do
@@ -74,14 +74,14 @@ group :test do
 end
 
 group :production do
-  gem "unicorn", "~> 4.8.0"
+  gem "unicorn", "~> 4.8.1"
 end
 
 # twitter-bootstrap-rails
 gem "less-rails"
-gem "libv8", "~> 3.11.8"
+gem "libv8", "~> 3.16.14.3"
 gem "twitter-bootstrap-rails", github: "seyhunak/twitter-bootstrap-rails", branch: "bootstrap3"
-gem "therubyracer", ">= 0.10.2", platform: :ruby
+gem "therubyracer", "~> 0.12.0", platform: :ruby
 
 gem "gitlab", "~> 3.0.0"
 gem "avatar", "~> 0.2.0"
