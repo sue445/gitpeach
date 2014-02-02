@@ -20,7 +20,7 @@ development:
   database: gitpeach_development
   pool: 5
   username: root
-  password: root
+  # password: root
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -48,8 +48,8 @@ test:
   encoding: unicode
   database: gitpeach_test
   pool: 5
-  username: root
-  password: root
+  # username: root
+  # password: root
 
 production:
   adapter: postgresql
