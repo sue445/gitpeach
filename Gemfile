@@ -62,11 +62,6 @@ group :test, :development do
   gem "factory_girl_rails", "~> 4.1.0"
   gem "database_rewinder", "~> 0.0.2"
 
-  # Jenkins CI
-  gem "simplecov", require: false
-  gem "simplecov-rcov", require: false
-  gem "ci_reporter", "~> 1.8.4"
-
   gem "pry"       , "~> 0.9.12.4"
   gem "pry-remote", "~> 0.1.7"
   gem "pry-nav"   , "~> 0.2.3"
