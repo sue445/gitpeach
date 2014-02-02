@@ -2,6 +2,9 @@ require 'rubygems'
 require 'rspec-parameterized'
 require 'webmock/rspec'
 
+require 'coveralls'
+Coveralls.wear!
+
 # for Jenkins CI
 begin
   require 'simplecov'

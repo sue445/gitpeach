@@ -75,6 +75,7 @@ end
 
 group :test do
   gem "webmock", "~> 1.16.1"
+  gem 'coveralls', require: false
 end
 
 group :production do

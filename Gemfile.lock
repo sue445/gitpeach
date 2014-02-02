@@ -70,6 +70,12 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     commonjs (0.2.7)
+    coveralls (0.7.0)
+      multi_json (~> 1.3)
+      rest-client
+      simplecov (>= 0.7)
+      term-ansicolor
+      thor
     crack (0.4.1)
       safe_yaml (~> 0.9.0)
     database_rewinder (0.0.2)
@@ -158,6 +164,8 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rspec (3.0.0.beta1)
       rspec-core (= 3.0.0.beta1)
       rspec-expectations (= 3.0.0.beta1)
@@ -227,6 +235,8 @@ GEM
       activesupport (>= 3.0)
       sprockets (~> 2.8)
     temple (0.6.7)
+    term-ansicolor (1.2.2)
+      tins (~> 0.8)
     therubyracer (0.11.4)
       libv8 (~> 3.11.8.12)
       ref
@@ -262,6 +272,7 @@ DEPENDENCIES
   binding_of_caller
   ci_reporter (~> 1.8.4)
   coffee-rails (~> 4.0.0)
+  coveralls
   database_rewinder (~> 0.0.2)
   factory_girl_rails (~> 4.1.0)
   friendly_id (~> 5.0.2)
