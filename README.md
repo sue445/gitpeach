@@ -1,8 +1,15 @@
-# Gitpeach
+# Gitpeach [![Build Status](https://travis-ci.org/sue445/gitpeach.png)](https://travis-ci.org/sue445/gitpeach) [![Build Status](https://travis-ci.org/sue445/gitpeach.png)](https://travis-ci.org/sue445/gitpeach)
+[waffle.io](https://waffle.io/) clone for [Gitlab](http://gitlab.org/)
+
+## Requirements
+* ruby 2.0.0+
+* MySQL or PostgreSQL
+* Pusher
 
 ## Setup
 ### Signup to [Pusher](https://app.pusher.com/)
 Create new app
+
 ![Create new app](http://cdn-ak.f.st-hatena.com/images/fotolife/s/sue445/20140121/20140121234019.png)
 
 ### Setup command
