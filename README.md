@@ -1,6 +1,8 @@
 # Gitpeach [![Build Status](https://travis-ci.org/sue445/gitpeach.png)](https://travis-ci.org/sue445/gitpeach) [![Coverage Status](https://coveralls.io/repos/sue445/gitpeach/badge.png)](https://coveralls.io/r/sue445/gitpeach) [![Dependency Status](https://gemnasium.com/sue445/gitpeach.png)](https://gemnasium.com/sue445/gitpeach) [![Code Climate](https://codeclimate.com/github/sue445/gitpeach.png)](https://codeclimate.com/github/sue445/gitpeach)
 [waffle.io](https://waffle.io/) clone for [Gitlab](http://gitlab.org/)
 
+![Gitpeach](https://raw.github.com/sue445/gitpeach/master/shots/gitpeach.gif)
+
 ## Requirements
 * ruby 2.0.0+
 * MySQL or PostgreSQL
@@ -10,7 +12,7 @@
 ### Signup to [Pusher](https://app.pusher.com/)
 Create new app
 
-![Create new app](http://cdn-ak.f.st-hatena.com/images/fotolife/s/sue445/20140121/20140121234019.png)
+![Pusher](https://raw.github.com/sue445/gitpeach/master/shots/pusher.png)
 
 ### Setup command
 ```sh
@@ -42,3 +44,9 @@ bundle exec rspec
 
 ## Sample scripts
 see [lib/support](lib/support)
+
+## FAQ
+### Q. Why Peach?
+A. Gitlab -> Git love -> Momozono Love -> Cure Peach
+
+Detail: http://en.wikipedia.org/wiki/Fresh_Pretty_Cure!
