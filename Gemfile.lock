@@ -233,7 +233,7 @@ GEM
     temple (0.6.7)
     term-ansicolor (1.2.2)
       tins (~> 0.8)
-    therubyracer (0.12.0)
+    therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
     thor (0.18.1)
@@ -292,7 +292,7 @@ DEPENDENCIES
   sass-rails (~> 4.0.0)
   sdoc
   slim-rails (~> 2.1.0)
-  therubyracer (~> 0.12.0)
+  therubyracer (~> 0.12.1)
   twitter-bootstrap-rails!
   uglifier (>= 1.3.0)
   unicorn (~> 4.8.1)

@@ -81,7 +81,7 @@ end
 gem "less-rails"
 gem "libv8", "~> 3.16.14.3"
 gem "twitter-bootstrap-rails", github: "seyhunak/twitter-bootstrap-rails", branch: "bootstrap3"
-gem "therubyracer", "~> 0.12.0", platform: :ruby
+gem "therubyracer", "~> 0.12.1", platform: :ruby
 
 gem "gitlab", "~> 3.0.0"
 gem "avatar", "~> 0.2.0"
