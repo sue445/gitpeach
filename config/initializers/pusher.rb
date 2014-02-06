@@ -12,4 +12,8 @@ else
   Pusher.secret = ENV["PUSHER_SECRET"]
 end
 
+raise "pusher app_id is required" if Pusher.app_id.blank?
+raise "pusher key is required"    if Pusher.key.blank?
+raise "pusher secret is required" if Pusher.secret.blank?
+
 Pusher.logger = Rails.logger
