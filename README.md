@@ -48,7 +48,18 @@ bundle exec rspec
 see [lib/support](lib/support)
 
 ## FAQ
+### Q. Difference with waffle.io
+1. realtime updates
+  * using websocket
+2. show milestone
+  * ![Milestone](https://raw.github.com/sue445/gitpeach/master/shots/milestone.png)
+
 ### Q. Why Peach?
 A. Gitlab -> Git love -> Momozono Love -> Cure Peach
 
-Detail: http://en.wikipedia.org/wiki/Fresh_Pretty_Cure!
+Detail: [Fresh Pretty Cure! - Wikipedia](http://en.wikipedia.org/wiki/Fresh_Pretty_Cure!)
+
+### Q. I want to change color
+1. open [bootstrap_and_overrides.css.less](app/assets/stylesheets/bootstrap_and_overrides.css.less)
+2. edit `@seed-color`
+  * ref. http://rriepe.github.io/1pxdeep/
