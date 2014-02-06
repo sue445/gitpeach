@@ -26,3 +26,7 @@ h1 Gitpeach
     .col-sm-offset-2.col-sm-10
       = button_tag type: "submit", class: "btn btn-default" do
         | Login with Gitlab
+
+coffee:
+  $(document).ready ->
+    $("#login").focus()
