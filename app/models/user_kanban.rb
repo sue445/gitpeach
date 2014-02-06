@@ -8,7 +8,8 @@ class UserKanban
   end
 
   def issues
-    @user.gitlab.issues(@kanban.gitlab_project_id, page: 1, per_page: 100)
+    # sort by newest
+    @user.gitlab.issues(@kanban.gitlab_project_id, page: 1, per_page: 100).sort{ |a,b| b.updated_at <=> a.updated_at }
   end
 
   def issue(issue_id)
