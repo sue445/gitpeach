@@ -5,7 +5,7 @@
 
 ## Requirements
 * Gitlab API 5.3.0+
-  * but 6.1.0 is not supported
+  * but **only 6.1.0** is not supported
 * ruby 2.0.0+
 * MySQL or PostgreSQL
 * Pusher
