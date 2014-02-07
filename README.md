@@ -4,8 +4,8 @@
 ![Gitpeach](https://raw.github.com/sue445/gitpeach/master/shots/gitpeach.gif)
 
 ## Requirements
-* Gitlab API 5.3.0+
-  * but **only 6.1.0** is not supported
+* Gitlab API 5.3.0+ and 6.0.x and 6.2.0+
+  * **only 6.1.0** is not supported
 * ruby 2.0.0+
 * MySQL or PostgreSQL
 * Pusher
