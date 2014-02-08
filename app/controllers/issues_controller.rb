@@ -1,5 +1,6 @@
 class IssuesController < ApplicationController
   before_action :set_kanban
+  before_action :setup_notification, only: [:create, :update]
 
   unless Rails.env.test?
     before_action :authenticate_user
@@ -35,10 +36,15 @@ class IssuesController < ApplicationController
     raise ArgumentError, "require to_label_id" unless params[:to_label_id]
 
     from_label_id = gitlab_current_issue_label_id
-    @labels = @kanban.update_gitlab_issue_labels(gitlab_issue_labels, from_label_id, params[:to_label_id])
-    @state  = @kanban.gitlab_issue_state(from_label_id, params[:to_label_id])
 
-    update_gitlab_issue(@labels, @state)
+    if from_label_id.to_i == params[:to_label_id].to_i
+      @is_notify_event = false
+    else
+      @labels = @kanban.update_gitlab_issue_labels(gitlab_issue_labels, from_label_id, params[:to_label_id])
+      @state  = @kanban.gitlab_issue_state(from_label_id, params[:to_label_id])
+
+      update_gitlab_issue(@labels, @state)
+    end
 
     render json: updated_issue, status: 200
   end
@@ -76,7 +82,13 @@ class IssuesController < ApplicationController
       @user_kanban.create_issue(title)
     end
 
+    def setup_notification
+      @is_notify_event = true
+    end
+
     def notify_event
+      return unless @is_notify_event
+
       label_groups = @kanban.label_groups(@user_kanban.issues)
       label_group_ids = label_groups.inject({}){|res, label_issues|
         label_id = label_issues[:label].id
