@@ -16,6 +16,7 @@ init_issue_panel = (selector) ->
       drag_manager.drag_end(event, ui)
       null
   )
+  $("#{selector} .issue-panel__updated_at").tooltip()
 
 init_label_column = (selector) ->
   $(selector).droppable(
