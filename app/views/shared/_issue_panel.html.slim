@@ -5,8 +5,12 @@
       - if issue.assignee
         = avatar_tag(issue.assignee, {size: 36}, class: "img-circle issue-panel__assignee")
   .panel-body
-    = link_to @user_kanban.issue_url(issue) do
-      = issue.title
+    .issue-panel__title
+      = link_to @user_kanban.issue_url(issue) do
+        = issue.title
+    small.issue-panel__updated_at data-toggle="tooltip" title=Time.zone.parse(issue.updated_at)
+      span.glyphicon.glyphicon-time
+      = " #{time_ago_in_words(issue.updated_at, include_seconds: true)} ago"
   .panel-footer.issue-panel__footer
     .issue-panel__labels
       - issue.labels.each do |label|
