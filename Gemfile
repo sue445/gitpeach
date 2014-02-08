@@ -74,7 +74,7 @@ group :test do
 end
 
 group :production do
-  gem "unicorn", "~> 4.8.1"
+  gem "unicorn", "~> 4.8.2"
 end
 
 # twitter-bootstrap-rails
