@@ -51,6 +51,7 @@ group :development do
   gem "better_errors"
   gem "binding_of_caller"
   gem "view_source_map", "0.0.3"
+  gem "net-http-spy"
 end
 
 group :test, :development do
