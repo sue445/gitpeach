@@ -51,8 +51,8 @@ see [lib/support](lib/support)
 ### Q. Difference with waffle.io
 1. realtime updates
   * using websocket
-2. show milestone
-  * ![Milestone](https://raw.github.com/sue445/gitpeach/master/shots/milestone.png)
+2. show milestone and timestamp
+  * ![Milestone](https://raw.github.com/sue445/gitpeach/master/shots/issue.png)
 
 ### Q. Why Peach?
 A. Gitlab -> Git love -> Momozono Love -> Cure Peach
