@@ -23,7 +23,7 @@ class UserKanban
 
   def update_issue(issue_id, labels, state_event)
     options = {
-        labels: labels.join(",")
+        labels: labels.empty? ? %q{''} : labels.join(",")
     }
     options[:state_event] = state_event if state_event
     @user.gitlab.edit_issue(@project.id, issue_id, options)
