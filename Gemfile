@@ -28,7 +28,7 @@ gem 'jbuilder', '~> 2.0.2'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
+  gem 'sdoc', '~> 0.4.0', require: false
 end
 
 # Use ActiveModel has_secure_password
@@ -47,10 +47,10 @@ gem "slim-rails", "~> 2.1.0"
 
 # dev tool
 group :development do
-  gem "annotate", "2.6.0", require: false
+  gem "annotate", "2.6.1", require: false
   gem "better_errors"
   gem "binding_of_caller"
-  gem "view_source_map", "0.0.3"
+  gem "view_source_map", "0.0.4"
   gem "net-http-spy"
 end
 
@@ -58,19 +58,19 @@ group :test, :development do
   # testing
   gem "rspec-rails", "~> 3.0.0.beta1"
   gem "rspec-collection_matchers", "~> 0.0.2"
-  gem "rspec-its", "1.0.0.pre"
+  gem "rspec-its", "1.0.0"
   gem "rspec-parameterized", github: "sue445/rspec-parameterized", branch: "rspec-3.0.0.beta1"
-  gem "factory_girl_rails", "~> 4.1.0"
+  gem "factory_girl_rails", "~> 4.4.0"
   gem "database_rewinder", "~> 0.0.2"
 
-  gem "pry"       , "~> 0.9.12.4"
-  gem "pry-remote", "~> 0.1.7"
+  gem "pry"       , "~> 0.9.12.6"
+  gem "pry-remote", "~> 0.1.8"
   gem "pry-nav"   , "~> 0.2.3"
   gem "pry-rails" , "~> 0.3.2"
 end
 
 group :test do
-  gem "webmock", "~> 1.16.1"
+  gem "webmock", "~> 1.17.3"
   gem 'coveralls', require: false
 end
 
