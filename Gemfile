@@ -86,5 +86,5 @@ gem "therubyracer", "~> 0.12.1", platform: :ruby
 
 gem "gitlab", "~> 3.0.0"
 gem "avatar", "~> 0.2.0"
-gem "friendly_id", "~> 5.0.2"
+gem "friendly_id", "~> 5.0.3"
 gem 'pusher'
