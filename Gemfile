@@ -57,7 +57,7 @@ end
 group :test, :development do
   # testing
   gem "rspec-rails", "~> 3.0.0.beta1"
-  gem "rspec-collection_matchers", "~> 0.0.2"
+  gem "rspec-collection_matchers", "~> 0.0.3"
   gem "rspec-its", "1.0.0"
   gem "rspec-parameterized", github: "sue445/rspec-parameterized", branch: "rspec-3.0.0.beta1"
   gem "factory_girl_rails", "~> 4.4.0"

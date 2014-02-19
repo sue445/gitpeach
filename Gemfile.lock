@@ -169,7 +169,7 @@ GEM
       rspec-core (= 3.0.0.beta1)
       rspec-expectations (= 3.0.0.beta1)
       rspec-mocks (= 3.0.0.beta1)
-    rspec-collection_matchers (0.0.2)
+    rspec-collection_matchers (0.0.3)
       rspec-expectations (>= 2.99.0.beta1)
     rspec-core (3.0.0.beta1)
     rspec-expectations (3.0.0.beta1)
@@ -289,7 +289,7 @@ DEPENDENCIES
   pry-remote (~> 0.1.8)
   pusher
   rails (= 4.0.3)
-  rspec-collection_matchers (~> 0.0.2)
+  rspec-collection_matchers (~> 0.0.3)
   rspec-its (= 1.0.0)
   rspec-parameterized!
   rspec-rails (~> 3.0.0.beta1)
