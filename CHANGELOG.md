@@ -1,5 +1,8 @@
 ## master
-[full changelog](http://github.com/sue445/gitpeach/compare/0.0.2...master)
+[full changelog](http://github.com/sue445/gitpeach/compare/0.0.3...master)
+
+## 0.0.3
+[full changelog](http://github.com/sue445/gitpeach/compare/0.0.2...0.0.3)
 
 * upgrade to rails 4.0.3
 * bugfix: Can not remove label
