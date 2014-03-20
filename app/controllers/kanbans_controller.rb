@@ -44,7 +44,7 @@ class KanbansController < ApplicationController
         label.destroy unless param_label_ids.include?(label.id)
       end
 
-      params[:labels].each_with_index do |label_params, index|
+      labels_params[:labels].each_with_index do |label_params, index|
         # for checked -> unchecked
         label_params[:is_backlog_issue] = false unless label_params.has_key?(:is_backlog_issue)
         label_params[:is_close_issue]   = false unless label_params.has_key?(:is_close_issue)
@@ -108,6 +108,10 @@ class KanbansController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def kanban_params
       params.require(:kanban).permit(:gitlab_project_id, :name)
+    end
+
+    def labels_params
+      params.permit(labels: [:name, :gitlab_label, :is_backlog_issue, :is_close_issue, :disp_order, :id])
     end
 
     def project_issues
