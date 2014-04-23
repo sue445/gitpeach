@@ -49,10 +49,10 @@ $(document).ready ->
     "issue_update_event",
     (data) ->
       for label_id, issue_ids of data.label_group_ids
-        ((label_id, issue_ids) ->
+        do (label_id, issue_ids) ->
           $("#count_#{label_id}").text(issue_ids.length)
           for issue_id in issue_ids
-            ((issue_id) ->
+            do (issue_id) ->
               $.ajax(
                 url: "/#{$("#kanban_name").val()}/issues/#{issue_id}"
                 dataType: "html"
@@ -61,8 +61,6 @@ $(document).ready ->
                   $("#label_#{label_id}").append($(html))
                   init_issue_panel("#issue_#{issue_id}")
               )
-            )(issue_id)
-        )(label_id, issue_ids)
   )
 
   $("#create_issue_form").submit ->

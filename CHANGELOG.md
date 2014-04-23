@@ -1,6 +1,8 @@
 ## master
 [full changelog](http://github.com/sue445/gitpeach/compare/0.0.4...master)
 
+* Refactor: js -> coffeescript
+
 ## 0.0.4
 [full changelog](http://github.com/sue445/gitpeach/compare/0.0.3...0.0.4)
 
