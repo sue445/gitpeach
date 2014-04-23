@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.4'
+gem 'rails', '4.1.0'
 
 # Support DBs
 gem 'mysql2', "~> 0.3.15",  group: :mysql
@@ -43,7 +43,7 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem "slim-rails", "~> 2.1.0"
+gem "slim-rails", "~> 2.1.4"
 
 # dev tool
 group :development do
@@ -56,7 +56,7 @@ end
 
 group :test, :development do
   # testing
-  gem "rspec-rails", "~> 3.0.0.beta1"
+  gem "rspec-rails", "~> 3.0.0.beta2"
   gem "rspec-collection_matchers", "~> 0.0.3"
   gem "rspec-its", "1.0.0"
   gem "rspec-parameterized", github: "sue445/rspec-parameterized", branch: "rspec-3.0.0.beta1"
