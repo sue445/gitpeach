@@ -1,4 +1,4 @@
-describe IssuesController do
+describe IssuesController, type: :controller do
   let(:kanban)  { FactoryGirl.create(:kanban) }
 
   describe "POST create" do
