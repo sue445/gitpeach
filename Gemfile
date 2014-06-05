@@ -56,12 +56,12 @@ end
 
 group :test, :development do
   # testing
-  gem "rspec-rails", "~> 3.0.0.beta2"
+  gem "rspec-rails", "~> 3.0.1"
   gem "rspec-collection_matchers", "~> 0.0.3"
   gem "rspec-its", "1.0.1"
-  gem "rspec-parameterized", github: "sue445/rspec-parameterized", branch: "rspec-3.0.0.beta1"
+  gem "rspec-parameterized", "~> 0.1.1"
   gem "factory_girl_rails", "~> 4.4.1"
-  gem "database_rewinder", "~> 0.0.3"
+  gem "database_rewinder", "~> 0.2.0"
 
   gem "pry"       , "~> 0.9.12.6"
   gem "pry-remote", "~> 0.1.8"
@@ -81,7 +81,7 @@ end
 # twitter-bootstrap-rails
 gem "less-rails", "2.5.0"
 gem "libv8", "~> 3.16.14.3"
-gem "twitter-bootstrap-rails", github: "seyhunak/twitter-bootstrap-rails", branch: "bootstrap3"
+gem "twitter-bootstrap-rails", github: "seyhunak/twitter-bootstrap-rails", branch: "bootstrap3", ref: "128f37"
 gem "therubyracer", "~> 0.12.1", platform: :ruby
 
 gem "gitlab", "~> 3.0.0"
