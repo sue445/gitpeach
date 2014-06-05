@@ -1,4 +1,4 @@
-describe SessionsController do
+describe SessionsController, type: :controller do
   describe "GET 'create'" do
     include_context :using_gitlab_mock
 
