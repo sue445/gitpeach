@@ -4,6 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/sue445/gitpeach/badge.png)](https://coveralls.io/r/sue445/gitpeach)
 [![Dependency Status](https://gemnasium.com/sue445/gitpeach.png)](https://gemnasium.com/sue445/gitpeach)
 [![Code Climate](https://codeclimate.com/github/sue445/gitpeach.png)](https://codeclimate.com/github/sue445/gitpeach)
+[![Inline docs](http://inch-ci.org/github/sue445/gitpeach.svg?branch=master)](http://inch-ci.org/github/sue445/gitpeach)
 
 [waffle.io](https://waffle.io/) clone for [Gitlab](http://gitlab.org/)
 
