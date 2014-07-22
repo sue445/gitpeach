@@ -1,4 +1,10 @@
-# Gitpeach [![Build Status](https://travis-ci.org/sue445/gitpeach.png)](https://travis-ci.org/sue445/gitpeach) [![Coverage Status](https://coveralls.io/repos/sue445/gitpeach/badge.png)](https://coveralls.io/r/sue445/gitpeach) [![Dependency Status](https://gemnasium.com/sue445/gitpeach.png)](https://gemnasium.com/sue445/gitpeach) [![Code Climate](https://codeclimate.com/github/sue445/gitpeach.png)](https://codeclimate.com/github/sue445/gitpeach)
+# Gitpeach
+
+[![Build Status](https://travis-ci.org/sue445/gitpeach.png)](https://travis-ci.org/sue445/gitpeach)
+[![Coverage Status](https://coveralls.io/repos/sue445/gitpeach/badge.png)](https://coveralls.io/r/sue445/gitpeach)
+[![Dependency Status](https://gemnasium.com/sue445/gitpeach.png)](https://gemnasium.com/sue445/gitpeach)
+[![Code Climate](https://codeclimate.com/github/sue445/gitpeach.png)](https://codeclimate.com/github/sue445/gitpeach)
+
 [waffle.io](https://waffle.io/) clone for [Gitlab](http://gitlab.org/)
 
 ![Gitpeach](https://raw.github.com/sue445/gitpeach/master/shots/gitpeach.gif)
