@@ -96,6 +96,27 @@ RAILS_ENV=production bundle exec rake db:migrate
 sudo /etc/init.d/unicorn_gitpeach restart
 ```
 
+## Production (Heroku)
+```sh
+heroku create
+git checkout -b deploy
+
+vi Gemfile
+# uncomment out this
+# ruby "2.1.2"
+
+bundle install --without mysql
+git add -f config/gitlab.yml
+git add -f config/pusher.yml
+git commit -am "Add setting for heroku"
+
+# push deploy branch as master branch
+git push heroku deploy:master
+
+heroku run rake db:migrate
+heroku open 
+```
+
 ## FAQ
 ### Q. Difference with waffle.io
 1. realtime updates

@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# uncomment out when deploy to Heroku
+# ruby "2.1.2"
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 
@@ -76,6 +79,7 @@ end
 
 group :production do
   gem "unicorn", "~> 4.8.2"
+  gem "rails_12factor"
 end
 
 # twitter-bootstrap-rails
