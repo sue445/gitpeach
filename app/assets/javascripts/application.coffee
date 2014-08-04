@@ -15,15 +15,15 @@
 #= require twitter/bootstrap
 #
 # UI Core
-#= require jquery.ui.core
-#= require jquery.ui.widget
-#= require jquery.ui.mouse
-#= require jquery.ui.position
+#= require jquery-ui/core
+#= require jquery-ui/widget
+#= require jquery-ui/mouse
+#= require jquery-ui/position
 #
 # Interactions
-#= require jquery.ui.draggable
-#= require jquery.ui.droppable
-#= require jquery.ui.sortable
+#= require jquery-ui/draggable
+#= require jquery-ui/droppable
+#= require jquery-ui/sortable
 #
 #= stub kanbans_show
 #= stub kanbans_edit

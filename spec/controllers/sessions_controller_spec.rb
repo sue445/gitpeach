@@ -8,7 +8,7 @@ describe SessionsController, type: :controller do
       json = <<JSON
 {"id":1,"username":"momozono_love","email":"cure_peach@fresh.precure.jp","name":"Momozono Love","bio":null,"skype":"","linkedin":"","twitter":"","theme_id":2,"color_scheme_id":1,"state":"active","created_at":"2014-01-05T17:10:37.000Z","extern_uid":null,"provider":null,"is_admin":false,"can_create_group":false,"can_create_project":false,"private_token":"gitlab_private_token"}
 JSON
-      stub_request(:post, "#{gitlab_endpoint}/session?private_token=#{gitlab_private_token}").
+      stub_request(:post, "#{gitlab_endpoint}/session").
           with(:body => "email=#{login}&password=#{password}",
                :headers => {'Accept'=>'application/json'}).
           to_return(:status => 200, :body => json, :headers => {})
