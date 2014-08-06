@@ -1,3 +1,5 @@
+# unescape url encoded id for rails 4.1.2+
+#
 # via.
 # * https://github.com/rails/rails/blob/v4.1.2/actionpack/CHANGELOG.md
 # * https://github.com/rails/rails/commit/8a067640e6fe222022dc77bb63d5da37ef75a189
