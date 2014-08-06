@@ -7,16 +7,8 @@
 def url_for_with_unescape_id(options = nil)
   path = url_for_without_unescape_id(options)
 
-  if options.is_a?(Hash)
-    original_id = options[:id].try(:to_s)
-    unless path.include?(original_id)
-      # id is escaped
-      escaped_id = URI.encode_www_form_component(original_id)
-      path = path.gsub(escaped_id, original_id)
-    end
-  end
-
-  path
+  # unescape: %2F -> /
+  path.gsub(%r{([a-zA-Z.0-9_\-]+)%2F([a-zA-Z.0-9_\-]+)}){ $1 + "/" + $2 }
 end
 
 module ActionView
