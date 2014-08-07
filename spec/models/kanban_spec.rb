@@ -146,7 +146,7 @@ describe Kanban do
         @to_label   = kanban.labels.find_by!(name: to_label_name)
       end
 
-      it{ should =~ expected }
+      it{ should match_array expected }
     end
 
   end
