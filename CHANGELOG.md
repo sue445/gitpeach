@@ -5,7 +5,6 @@
 [full changelog](http://github.com/sue445/gitpeach/compare/0.0.5...0.0.6)
 
 * Support [Heroku](http://www.heroku.com/)
-* upgrade to rails 4.1.4
 
 ## 0.0.5
 [full changelog](http://github.com/sue445/gitpeach/compare/0.0.4...0.0.5)
