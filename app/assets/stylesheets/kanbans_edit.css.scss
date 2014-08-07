@@ -2,6 +2,10 @@ li.edit_label i.drag-column {
   cursor:     move;
 }
 
+li.edit_label input {
+  color: #333;
+}
+
 ul#hidden_list {
   display: none;
 }
