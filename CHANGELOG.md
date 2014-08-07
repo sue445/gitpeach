@@ -1,5 +1,8 @@
 ## master
-[full changelog](http://github.com/sue445/gitpeach/compare/0.0.6...master)
+[full changelog](http://github.com/sue445/gitpeach/compare/0.0.7...master)
+
+## 0.0.7
+[full changelog](http://github.com/sue445/gitpeach/compare/0.0.6...0.0.7)
 
 * upgrade to rails 4.1.4
 
