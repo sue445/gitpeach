@@ -15,7 +15,7 @@ form.form-inline#create_issue_form role="form"
     span.glyphicon.glyphicon-plus
     | New Issue
 
-  = image_tag image_path("loading.gif"), id: "loading", style: "display: none"
+  = image_tag "loading.gif", id: "loading", style: "display: none"
 
 .row
   - @label_groups.each do |label_group|
