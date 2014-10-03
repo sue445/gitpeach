@@ -46,7 +46,7 @@ group :test do
   gem "rspec-its", "1.0.1"
   gem "rspec-parameterized", "~> 0.1.2"
   gem "rspec-rails", "~> 3.1.0", group: :development
-  gem "webmock", "~> 1.18.0"
+  gem "webmock", "~> 1.19.0"
 end
 
 group :production do
