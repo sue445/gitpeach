@@ -11,15 +11,15 @@ gem 'mysql2', "~> 0.3.15",  group: :mysql
 gem 'pg', group: :postgres
 
 gem "avatar", "~> 0.2.0"
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.0.1'
 gem "friendly_id", "~> 5.0.3"
 gem "gitlab", "~> 3.2.0"
-gem 'jbuilder', '~> 2.1.3'
+gem 'jbuilder', '~> 2.2.3'
 gem 'jquery-rails', "~> 3.1.2"
-gem "jquery-ui-rails", "~> 5.0.0"
+gem "jquery-ui-rails", "~> 5.0.2"
 gem "less-rails", "2.5.0"
 gem "libv8", "~> 3.16.14.7"
-gem 'pusher', "~> 0.14.1"
+gem 'pusher', "~> 0.14.2"
 gem 'sass-rails', '~> 4.0.3'
 gem "slim-rails", "~> 2.1.5"
 gem "therubyracer", "~> 0.12.1", platform: :ruby
@@ -35,21 +35,21 @@ group :development do
   gem "pry-remote", "~> 0.1.8"   , group: :test
   gem "pry-nav"   , "~> 0.2.4"   , group: :test
   gem "pry-rails" , "~> 0.3.2"   , group: :test
-  gem "view_source_map", "0.0.9"
+  gem "view_source_map", "0.1.0"
 end
 
 group :test do
   gem 'coveralls', '~> 0.7.1', require: false
   gem "database_rewinder", "~> 0.4.1"
-  gem "factory_girl_rails", "~> 4.4.1", group: :development
+  gem "factory_girl_rails", "~> 4.5.0", group: :development
   gem "rspec-collection_matchers", "~> 1.0.0"
   gem "rspec-its", "1.0.1"
   gem "rspec-parameterized", "~> 0.1.2"
   gem "rspec-rails", "~> 3.1.0", group: :development
-  gem "webmock", "~> 1.19.0"
+  gem "webmock", "~> 1.20.0"
 end
 
 group :production do
-  gem "rails_12factor"
+  gem "rails_12factor", "0.0.3"
   gem "unicorn", "~> 4.8.3"
 end
