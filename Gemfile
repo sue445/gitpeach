@@ -11,7 +11,7 @@ gem 'mysql2', "~> 0.3.15",  group: :mysql
 gem 'pg', group: :postgres
 
 gem "avatar", "~> 0.2.0"
-gem 'coffee-rails', '~> 4.0.1'
+gem 'coffee-rails', '~> 4.1.0'
 gem "friendly_id", "~> 5.0.3"
 gem "gitlab", "~> 3.2.0"
 gem 'jbuilder', '~> 2.2.3'
