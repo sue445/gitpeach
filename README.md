@@ -133,3 +133,7 @@ Detail: [Fresh Pretty Cure! - Wikipedia](http://en.wikipedia.org/wiki/Fresh_Pret
 1. open [bootstrap_and_overrides.css.less](app/assets/stylesheets/bootstrap_and_overrides.css.less)
 2. edit `@seed-color`
   * ref. http://rriepe.github.io/1pxdeep/
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/sue445/gitpeach/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
