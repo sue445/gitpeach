@@ -44,7 +44,7 @@ group :test do
   gem "factory_girl_rails", "~> 4.5.0", group: :development
   gem "rspec-collection_matchers", "~> 1.0.0"
   gem "rspec-its", "1.0.1"
-  gem "rspec-parameterized", "~> 0.1.2"
+  gem "rspec-parameterized"
   gem "rspec-rails", "~> 3.1.0", group: :development
   gem "webmock", "~> 1.20.0"
 end
